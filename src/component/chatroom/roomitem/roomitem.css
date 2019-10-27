@@ -1,0 +1,16 @@
+.mycontainer{
+    float: left;
+    width: 400px;
+    border: #9d9d9d 1px solid;
+    border-radius:10px ;
+    margin: 30px;
+    padding: 20px;
+}
+
+.image{
+    height: 150px;
+    width: 150px;
+}
+.image :hover{
+    filter: grayscale(100%);
+}
