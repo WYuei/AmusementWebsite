@@ -7,6 +7,10 @@ export default class RoomItem extends Component{
     constructor(props){
         super(props)
     }
+    handleIn=()=>{
+        const {history}=this.props
+        history.push('/views/roompage')
+    }
     render(){
         const {title,description}=this.props
         return (
@@ -21,6 +25,7 @@ export default class RoomItem extends Component{
                 }}
                 cover={<img  src={require('../../../img/1.jpg')} />}
                 className='shake-rotate'
+                onClick={this.handleIn}
             >
                 <Meta title={title} description={description} />
             </Card>

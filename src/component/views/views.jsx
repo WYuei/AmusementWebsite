@@ -5,12 +5,20 @@ import {BrowserRouter,Link,Switch,Route,Redirect} from 'react-router-dom'
 import 'antd/dist/antd.css'
 import './views.css'
 import ChatRoom from "../chatroom/chartroom";
+import RoomPage from "../chatroom/roompage/roompage";
 
 const { SubMenu } = Menu;
 const { Content, Sider } = Layout;
 
 export default class Views extends Component{
+    constructor(props)
+    {
+        super(props)
+    }
     render(){
+        const  data = this.props.location.state;
+        const {username}=data
+        console.log(username)
         return(
             <BrowserRouter>
         <Layout className="layout">
@@ -35,10 +43,12 @@ export default class Views extends Component{
                                 <SubMenu
                                     key="sub2"
                                     title={<span><Icon type="laptop" />Chat Room</span>}>
-                                    <Menu.Item key="5"><Link to='/views/chatroom'>Room List</Link></Menu.Item>
-                                    <Menu.Item key="6">option6</Menu.Item>
-                                    <Menu.Item key="7">option7</Menu.Item>
-                                    <Menu.Item key="8">option8</Menu.Item>
+                                    <Menu.Item key="5">
+                                        <Link to='/views/chatroom'>Room List</Link>
+                                    </Menu.Item>
+                                    <Menu.Item key="6">
+                                        Room Page
+                                    </Menu.Item>
                                 </SubMenu>
                                 <SubMenu
                                     key="sub3"
@@ -56,8 +66,8 @@ export default class Views extends Component{
                         </Sider>
                         <Content style={{ padding: '0 24px', minHeight: 280 }}>
                             <Switch>
-
                                 <Route path='/views/chatroom' component={ChatRoom}/>
+                                <Route path='/views/roompage' component={RoomPage}/>
                                 <Redirect to='/views/chatroom'/>
                             </Switch>
                         </Content>

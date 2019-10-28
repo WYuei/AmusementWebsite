@@ -1,5 +1,6 @@
 import React,{Component} from 'react'
 import { Modal,Icon,Form, Input, Radio} from 'antd'
+import {withRouter} from 'react-router-dom'
 
 import RoomItem from "./roomitem/roomitem";
 import './chatroom.css'
@@ -46,7 +47,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
 );
 
 
-export default class ChatRoom extends Component{
+class ChatRoom extends Component{
     state={
         roomdata:[
             {
@@ -105,7 +106,6 @@ export default class ChatRoom extends Component{
         this.formRef = formRef;
     };
 
-
     render(){
         return (
             <div>
@@ -137,7 +137,9 @@ export default class ChatRoom extends Component{
                                 <RoomItem
                                     key={index}
                                     title={roomitem.title}
-                                    description={roomitem.description}/>
+                                    description={roomitem.description}
+                                    history={this.props.history}
+                                />
                             )
                         })
                     }
@@ -146,3 +148,5 @@ export default class ChatRoom extends Component{
         )
     }
 }
+
+export default withRouter(ChatRoom)

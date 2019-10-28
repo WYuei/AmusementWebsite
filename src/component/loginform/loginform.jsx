@@ -6,19 +6,41 @@ export default class LoginForm extends Component{
         super(props)
     }
 
+    state={
+        username:""
+    }
     handleSubmit=(e)=>{
+        let path={
+            pathname:'/views',
+            state:{
+                username:this.state.username
+            }
+        }
         e.preventDefault()
-        this.props.history.push('/views')
+        this.props.history.push(path)
     }
 
+    handleUsername=(event)=>{
+        const username=event.target.value.trim()
+        this.setState({username:username})
+    }
     render(){
+        const {username}=this.state
         return (
             <div className="row" id="login">
                 <form  className="form-horizontal">
                     <div className="form-group">
                         <label htmlFor="inputEmail3" className="col-sm-3 control-label">UserName</label>
                         <div className="col-sm-6">
-                            <input type="email" className="form-control" id="inputEmail3" placeholder="UserName" style={{opacity:0.8}} />
+                            <input
+                                type="email"
+                                className="form-control"
+                                id="inputEmail3"
+                                placeholder="UserName"
+                                style={{opacity:0.8}}
+                                onChange={this.handleUsername}
+                                value={username}
+                            />
                         </div>
                     </div>
                     <div className="form-group">
