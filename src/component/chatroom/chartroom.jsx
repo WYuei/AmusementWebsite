@@ -14,7 +14,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
             return (
                 <Modal
                     visible={visible}
-                    title="Create a new chat room"
+                    title="Create a new chat room here"
                     okText="Create"
                     onCancel={onCancel}
                     onOk={onCreate}
