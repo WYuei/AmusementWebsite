@@ -68,7 +68,7 @@ export default class Views extends Component{
                             <Switch>
                                 <Route path='/views/chatroom' component={ChatRoom}/>
                                 <Route path='/views/roompage' component={RoomPage}/>
-                                <Redirect to='/views/chatroom'/>
+                                <Redirect to='/views/roompage'/>
                             </Switch>
                         </Content>
                     </Layout>

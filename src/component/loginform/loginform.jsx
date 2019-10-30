@@ -7,7 +7,7 @@ export default class LoginForm extends Component{
     }
 
     state={
-        username:""
+        username:"123"
     }
     handleSubmit=(e)=>{
         let path={

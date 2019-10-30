@@ -1,0 +1,20 @@
+.message{
+    position: relative;
+    margin-bottom: 40px;
+    display: block;
+}
+.personName{
+    margin-left: 10px;
+}
+.messageContext{
+    background-color: lightgray;
+    border-radius: 0px 15px  15px 15px;
+    box-shadow: darkgrey 3px 3px 4px 0px ;
+    font-size: 20px;
+    width: 20%;
+    padding-left: 20px !important;
+    padding: 10px;
+    position: absolute;
+    top:40px;
+    left:60px;
+}
