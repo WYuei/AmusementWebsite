@@ -1,0 +1,40 @@
+.roomlist{
+    margin-left: -24px;
+    width: 310px;
+    height: 700px;
+    float: left;
+    border-right: lightgray 1px solid;
+}
+.roomlist Card{
+    border: none;
+}
+.roomlist Search{
+    width: 300px;
+    margin-left: 20px;
+    margin-right: auto;
+
+}
+.roomContext{
+    margin-left: 325px;
+}
+.inputArea{
+    position: absolute;
+    bottom: 80px;
+    width: 60%;
+    border-radius: 10px;
+    background-color: rgb(240,240,240);
+}
+.inputArea a{
+    position: absolute;
+    border-radius: 30px;
+    box-shadow: #9d9d9d 1px 1px 1px 1px;
+}
+.inputArea TextArea{
+    background-color: rgb(240,240,240);
+    border: none;
+}
+.manyTools{
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+}
