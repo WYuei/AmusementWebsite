@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import {Icon,Input,Card,Avatar} from 'antd'
+import {Icon,Input,Card,Avatar,Button} from 'antd'
 
 import MessageItem from "../messageitem/messageitem";
 import './roompage.css'
@@ -8,7 +8,7 @@ const { Search } = Input;
 
 export default class RoomPage extends Component{
     state={
-        messageArr:[
+        messageArr:[[
             {
                 isMe:true,
                 name:"Linvanuevi",
@@ -30,7 +30,17 @@ export default class RoomPage extends Component{
                 message:"我在写作业呀呀呀呀呀呀呀"
             },
             ],
-        inputMessage:""
+            [
+                {
+                    isMe:false,
+                    name:"Li",
+                    message:"hah"
+                }
+            ]
+        ],
+        inputMessage:"",
+        roomitems:[],
+        chosenIndex:0
     }
     handleInput = (event)=>{
         const msg=event.target.value.trim()
@@ -39,9 +49,19 @@ export default class RoomPage extends Component{
                 inputMessage:msg
             }
         )
-
-
 }
+    handleRoom = ()=>{
+        console.log('1')
+    }
+    componentDidMount() {
+        const {roomitems,index}=this.props.location.state
+        this.setState({
+            roomitems:roomitems,
+            chosenIndex:index
+        })
+    }
+
+
     handleSend=()=>{
         const msgArr=this.state.messageArr
         const msg=this.state.inputMessage
@@ -58,38 +78,39 @@ export default class RoomPage extends Component{
         })
     }
     render(){
-        const {messageArr,inputMessage}=this.state
+        const {messageArr,inputMessage,roomitems,chosenIndex}=this.state
         return (
             <div>
                 <div className='roomlist'>
                     <Search
                         placeholder="搜索聊天室的名称..."
                         onSearch={value => console.log(value)}
-                        style={{ width: 200,marginLeft:46 }}
+                        style={{ width: 200,marginLeft:46,marginBottom:10 }}
                     />
-                    <Card style={{borderTop:'none',borderLeft:'none',borderRight:'none'}}>
-                        <Avatar
-                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                        size="large"
-                    /><span>chatroom name</span>
-                    </Card>
-                    <Card style={{borderTop:'none',borderLeft:'none',borderRight:'none'}}>
-                        <Avatar
-                            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                            size="large"
-                        />
-                    </Card>
-                    <Card style={{borderTop:'none',borderLeft:'none',borderRight:'none'}}>
-                        <Avatar
-                            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                            size="large"
-                        />
-                    </Card>
+                    {
+                        roomitems.map((item,index)=>{
+                            return (
+                                <Card
+                                    hoverable
+                                    style={{borderTop:'none',borderLeft:'none',borderRight:'none',height:"auto"}}
+                                    key={index}
+                                    className={index===chosenIndex?'chosen':'nochosen'}
+                                >
+                                    <Avatar
+                                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                                        size="large"
+                                    /><span className='title' >{item.title}</span>
+
+                                    <span className='description'>{item.description}</span>
+                                </Card>
+                            )
+                        })
+                    }
                 </div>
 
                 <div className='roomContext' >
                     <div>{
-                messageArr.map((item,index)=>{
+                messageArr[1].map((item,index)=>{
                     return (
                         <MessageItem
                             isMe={item.isMe}

@@ -56,7 +56,7 @@ class ChatRoom extends Component{
             },
             {
                 title:"大家好",
-                description:"上午8：00到下午2：00都有人哦"
+                description:"上午8：00到下午2：00都有人"
             },
             {
                 title:"111111",
@@ -70,6 +70,7 @@ class ChatRoom extends Component{
         ModalText: 'Content of the modal',
         visible: false,
         confirmLoading: false,
+        username:""
 
     }
     handleAdd=()=>{
@@ -107,10 +108,12 @@ class ChatRoom extends Component{
     };
 
     render(){
+        const {username}=this.props.location.state
+        const {roomadata}=this.state
         return (
             <div>
                 <div className='welcomeArea'>
-                    welcome
+                    welcome,{username}
                 </div>
                 <div className='btnArea' style={{opacity:1,marginTop:10}}>
                         <a className="btn btn-default" onClick={this.handleAdd}>
@@ -139,6 +142,8 @@ class ChatRoom extends Component{
                                     title={roomitem.title}
                                     description={roomitem.description}
                                     history={this.props.history}
+                                    index={index}
+                                    roomitems={this.state.roomdata}
                                 />
                             )
                         })

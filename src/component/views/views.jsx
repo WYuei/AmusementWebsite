@@ -16,9 +16,9 @@ export default class Views extends Component{
         super(props)
     }
     render(){
-        const  data = this.props.location.state;
+        const data= this.props.location.state;
         const {username}=data
-        console.log(username)
+        console.log(this.props.location)
         return(
             <BrowserRouter>
         <Layout className="layout">
@@ -44,7 +44,13 @@ export default class Views extends Component{
                                     key="sub2"
                                     title={<span><Icon type="laptop" />Chat Room</span>}>
                                     <Menu.Item key="5">
-                                        <Link to='/views/chatroom'>Room List</Link>
+                                        <Link to={
+                                            {pathname:'/views/chatroom',
+                                            state:{
+                                                username:username
+                                            }}}>
+                                            Room List
+                                        </Link>
                                     </Menu.Item>
                                     <Menu.Item key="6">
                                         Room Page
@@ -68,7 +74,11 @@ export default class Views extends Component{
                             <Switch>
                                 <Route path='/views/chatroom' component={ChatRoom}/>
                                 <Route path='/views/roompage' component={RoomPage}/>
-                                <Redirect to='/views/roompage'/>
+                                <Redirect to={
+                                    {pathname:'/views/chatroom',
+                                        state:{
+                                            username:username
+                                        }}}/>
                             </Switch>
                         </Content>
                     </Layout>

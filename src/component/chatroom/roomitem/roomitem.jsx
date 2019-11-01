@@ -8,8 +8,15 @@ export default class RoomItem extends Component{
         super(props)
     }
     handleIn=()=>{
-        const {history}=this.props
-        history.push('/views/roompage')
+        const {roomitems,index}=this.props
+        let path={
+            pathname:'/views/roompage',
+            state:{
+                roomitems:roomitems,
+                index:index
+            }
+        }
+        this.props.history.push(path)
     }
     render(){
         const {title,description}=this.props
