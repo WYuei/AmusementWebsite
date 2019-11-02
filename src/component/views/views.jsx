@@ -38,22 +38,18 @@ export default class Views extends Component{
                             >
                                 <SubMenu
                                     key="sub1"
-                                    title={<span><Icon type="user" />subnav 1</span>}>
+                                    title={<span><Icon type="user" />目录1</span>}>
                                 </SubMenu>
                                 <SubMenu
                                     key="sub2"
                                     title={<span><Icon type="laptop" />Chat Room</span>}>
-                                    <Menu.Item key="5">
-                                        <Link to={
+                                    <Menu.Item key="5"><Link to={
                                             {pathname:'/views/chatroom',
                                             state:{
                                                 username:username
-                                            }}}>
-                                            Room List
+                                            }}}>Room List
+
                                         </Link>
-                                    </Menu.Item>
-                                    <Menu.Item key="6">
-                                        Room Page
                                     </Menu.Item>
                                 </SubMenu>
                                 <SubMenu
@@ -61,12 +57,24 @@ export default class Views extends Component{
                                     title={
                                         <span>
                   <Icon type="notification" />
-                  subnav 3
+                  目录3
                 </span>
                                     }
                                 >
-                                    <Menu.Item key="9">option9</Menu.Item>
-                                    <Menu.Item key="10">option10</Menu.Item>
+                                    <Menu.Item key="9">option</Menu.Item>
+                                    <Menu.Item key="10">option</Menu.Item>
+                                </SubMenu>
+                                <SubMenu
+                                    key="sub4"
+                                    title={
+                                        <span>
+                  <Icon type="bar-chart" />
+                  目录4
+                </span>
+                                    }
+                                >
+                                    <Menu.Item key="11">option</Menu.Item>
+                                    <Menu.Item key="12">option</Menu.Item>
                                 </SubMenu>
                             </Menu>
                         </Sider>

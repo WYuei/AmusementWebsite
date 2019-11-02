@@ -57,3 +57,11 @@
     height: 50px;
     padding: 10px;
 }
+.noMessage{
+    margin-left: 500px;
+    margin-right: auto;
+}
+.fileClip{
+    color: whitesmoke;
+    font-weight: bolder;
+}

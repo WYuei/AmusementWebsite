@@ -107,20 +107,33 @@ class ChatRoom extends Component{
         this.formRef = formRef;
     };
 
+    handleRandomIn=()=>{
+        const {roomdata}=this.state
+        let num=Math.random()*10%(roomdata.length)
+        num=Math.floor(num)
+        let path={
+            pathname:'/views/roompage',
+            state:{
+                roomitems:roomdata,
+                index:num
+            }
+        }
+        this.props.history.push(path)
+    }
     render(){
         const {username}=this.props.location.state
         const {roomadata}=this.state
         return (
             <div>
                 <div className='welcomeArea'>
-                    welcome,{username}
+                    Welcome to Chat Room Online and Click to Start,{username}
                 </div>
                 <div className='btnArea' style={{opacity:1,marginTop:10}}>
                         <a className="btn btn-default" onClick={this.handleAdd}>
                             <Icon type="plus-circle" style={{marginRight:10}} />
                             Create New Room
                         </a>
-                        <a className="btn btn-default">
+                        <a className="btn btn-default" onClick={this.handleRandomIn}>
                             <Icon type="bulb" style={{marginRight:10}} />
                             Join Randomly
                         </a>
