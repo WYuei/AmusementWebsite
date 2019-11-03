@@ -31,29 +31,34 @@ export default class RoomPage extends Component{
             {
                 isMe:true,
                 name:"Linvanuevi",
-                message:"嗨，你在做什么，我待会要去实验室写报告了！啊aaaaaaa"
+                message:"嗨，你在做什么，我待会要去实验室写报告了！啊aaaaaaa",
+                isBolder:false
             },
             {
                 isMe:false,
                 name:"David",
-                message:"今天是礼拜一"
+                message:"今天是礼拜一",
+                isBolder:false
             },
             {
                 isMe:false,
                 name:"David",
-                message:"哈利波特！"
+                message:"哈利波特！",
+                isBolder:false
             },
             {
                 isMe:true,
                 name:"Linvanuevi",
-                message:"我在写作业呀呀呀呀呀呀呀"
+                message:"我在写作业呀呀呀呀呀呀呀",
+                isBolder:false
             },
             ],
             [
                 {
                     isMe:false,
                     name:"Li",
-                    message:"hah"
+                    message:"hah",
+                    isBolder:false
                 }
             ]
         ],
@@ -61,7 +66,8 @@ export default class RoomPage extends Component{
         roomitems:[],
         chosenIndex:0,
         video:'none',
-        isUpload:false
+        isUpload:false,
+        isBolder:false
     }
 
     componentDidMount() {
@@ -89,7 +95,7 @@ export default class RoomPage extends Component{
     }
     handleSend=()=>{
         const msgArr=this.state.messageArr
-        const {isUpload,chosenIndex}=this.state
+        const {isUpload,isBolder,chosenIndex}=this.state
         let msg
         if(isUpload)
         {
@@ -103,20 +109,23 @@ export default class RoomPage extends Component{
             {msgArr[chosenIndex]=[{
                 isMe:true,
                 name:"Linvanuevi",
-                message:msg
+                message:msg,
+                isBolder:isBolder
                 }]
             }
         else
             msgArr[chosenIndex].push({
                 isMe:true,
                 name:"Linvanuevi",
-                message:msg
+                message:msg,
+                isBolder:isBolder
                 })
         console.log(msgArr)
         this.setState({
             messageArr:msgArr,
             inputMessage:"",
-            isUpload:false
+            isUpload:false,
+            isBolder:false
             })
 
 
@@ -129,6 +138,11 @@ export default class RoomPage extends Component{
             isVideo='none'
         this.setState({
             video:isVideo
+        })
+    }
+    setBloder=()=>{
+        this.setState({
+            isBolder:true
         })
     }
     render(){
@@ -182,6 +196,7 @@ export default class RoomPage extends Component{
                                         name={item.name}
                                         message={item.message}
                                         key={index}
+                                        isBolder={item.isBolder}
                                     />
                                 )
                 })
@@ -196,6 +211,10 @@ export default class RoomPage extends Component{
                                     onClick={this.onVideo}/>
                             <Icon type="phone"
                                   style={{ fontSize: '30px', marginRight:15 }}/>
+                            <Icon type="bold"
+                                  style={{ fontSize: '30px', marginRight:15 }}
+                                  onClick={this.setBloder}
+                            />
                             <Icon type="italic"
                                   style={{ fontSize: '30px', marginRight:15 }}/>
                             <Icon type="font-size"

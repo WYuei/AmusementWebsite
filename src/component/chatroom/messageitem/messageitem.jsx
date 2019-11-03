@@ -2,7 +2,7 @@ import React,{Component} from 'react'
 import './messageitem.css'
 export default class MessageItem extends Component{
     render(){
-        const {isMe,name,message}=this.props
+        const {isMe,name,message,isBolder}=this.props
         return (
             !isMe?
             <div className='message'>
@@ -11,13 +11,16 @@ export default class MessageItem extends Component{
                     style={{width:50,height:50,borderRadius:50 }}/>
                     <span className='personName'>{name}</span>
                 </div>
-                <div className='messageContext'>
+                <div className='messageContext'
+                     style={{fontWeight:isBolder?'bold':'normal'}}
+                >
                     {message}
                 </div>
             </div>
                 :
                 <div className='messageRight'>
-                    <div className='messageContextRight'>
+                    <div className='messageContextRight'
+                         style={{fontWeight:isBolder?'bold':'normal'}}>
                         {message}
                     </div>
                     <div className='avatar'>
