@@ -32,7 +32,7 @@ class HomePage extends Component{
                             <div id="context" className="col-md-10 col-md-offset-1">
                                 <h1>We are <span className="brand-heading">Connected</span></h1>
                                 <p className="intro-text">A WebRTC website homework of WangYuWei</p>
-                                <a className="btn btn-default page-scroll" onClick={this.scrollWindow} >Learn More</a>
+                                <a className="btn btn-default2 page-scroll" onClick={this.scrollWindow} >Learn More</a>
                             </div>
                         </div>
                         <LoginForm history={this.props.history}/>

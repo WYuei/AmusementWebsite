@@ -30,7 +30,7 @@ export default class RoomItem extends Component{
                     margin:30,
                     height:300
                 }}
-                cover={<img  src={require('../../../img/1.jpg')} />}
+                cover={<img  src={require('../../../img/chatroomAvatar.jpg')} />}
                 className='shake-rotate'
                 onClick={this.handleIn}
             >

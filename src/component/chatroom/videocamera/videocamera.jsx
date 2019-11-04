@@ -26,11 +26,6 @@ export default class VideoCamera extends Component{
                 video.onloadedmetadata = function(e) {
                     video.play();
                 };
-                let video2 = document.querySelector('video2');
-                video2.srcObject = mediaStream;
-                video2.onloadedmetadata = function(e) {
-                    video2.play();
-                };
             })
             .catch(function(err)
             { console.log(err.name + ": " + err.message); }); // always check for errors at the end.

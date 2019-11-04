@@ -5,6 +5,9 @@
     float: left;
     border-right: lightgray 1px solid;
 }
+.onlineName{
+    margin-left: 10px;
+}
 .roomlist Card{
     border: none;
     position: relative;

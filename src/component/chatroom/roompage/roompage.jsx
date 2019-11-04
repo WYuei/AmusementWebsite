@@ -4,9 +4,13 @@ import {Icon,Input,Card,Avatar,Upload, message,Popover,Button} from 'antd'
 import MessageItem from "../messageitem/messageitem";
 import './roompage.css'
 import VideoCamera from "../videocamera/videocamera";
+import io from 'socket.io-client'
+
 const { TextArea } = Input;
 const { Search } = Input;
 
+const url='ws://localhost:8080'
+const socket = io(url);
 const props = {
     action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
     onChange({ file, fileList }) {
@@ -24,50 +28,24 @@ const content = (
     </Upload>
 );
 
+const onlinePeople=(
+    <div>
+        <Avatar shape="square" size="small" icon="user" />
+        <span className='onlineName'>Linvanuevi</span>
+    </div>
+)
+
 let listfile=[]
 export default class RoomPage extends Component{
     state={
-        messageArr:[[
-            {
-                isMe:true,
-                name:"Linvanuevi",
-                message:"嗨，你在做什么，我待会要去实验室写报告了！啊aaaaaaa",
-                isBolder:false
-            },
-            {
-                isMe:false,
-                name:"David",
-                message:"今天是礼拜一",
-                isBolder:false
-            },
-            {
-                isMe:false,
-                name:"David",
-                message:"哈利波特！",
-                isBolder:false
-            },
-            {
-                isMe:true,
-                name:"Linvanuevi",
-                message:"我在写作业呀呀呀呀呀呀呀",
-                isBolder:false
-            },
-            ],
-            [
-                {
-                    isMe:false,
-                    name:"Li",
-                    message:"hah",
-                    isBolder:false
-                }
-            ]
-        ],
+        messageArr:[],
         inputMessage:"",
         roomitems:[],
         chosenIndex:0,
         video:'none',
         isUpload:false,
-        isBolder:false
+        isBolder:false,
+        user:true
     }
 
     componentDidMount() {
@@ -76,6 +54,16 @@ export default class RoomPage extends Component{
             roomitems:roomitems,
             chosenIndex:index
         })
+        io(url).on('connect', ()=>{
+            console.log('connect');
+            socket.on('messages', data => {
+                //返回用户列表
+                console.log('111')
+                })
+            })
+
+
+        console.log("新用户d5ea4473-43c3-4dfb-94af-eea381d3848e加入房间")
     }
     handleInput = (event)=>{
         const msg=event.target.value.trim()
@@ -99,6 +87,7 @@ export default class RoomPage extends Component{
         let msg
         if(isUpload)
         {
+            console.log("用户d5ea4473-43c3-4dfb-94af-eea381d3848e在房间__"+this.state.chosenIndex+"__请求发送文件")
             msg=listfile.map((item,index)=>
                 <span className='fileClip' key={index}><Icon type="paper-clip" />{item.name}</span>
             )
@@ -127,6 +116,9 @@ export default class RoomPage extends Component{
             isUpload:false,
             isBolder:false
             })
+
+       /* let rtc=SkyRTC()
+        rtc.broadcast(this.state.inputMessage)*/
 
 
     }
@@ -158,18 +150,33 @@ export default class RoomPage extends Component{
                     {
                         roomitems.map((item,index)=>{
                             return (
-                                <Card
-                                    style={{borderTop:'none',borderLeft:'none',borderRight:'none',height:"auto"}}
-                                    key={index}
-                                    className={index===chosenIndex?'chosen':'nochosen'}
-                                >
-                                    <Avatar
-                                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                                        size="large"
-                                    /><span className='title' >{item.title}</span>
 
+                               <Card
+                                    style={{borderTop:'none',borderLeft:'none',borderRight:'none',height:"auto"}}
+                                    className={index===chosenIndex?'chosen':'nochosen'}
+                                    key={index}
+                                >
+                                    {index===chosenIndex?
+                                        <Popover
+                                            content={onlinePeople}
+                                            placement="right"
+                                            title={"当前在线成员"}
+                                            key={index}
+                                        ><Avatar
+                                                src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                                                size="large"
+                                            />
+                                        </Popover>
+                                        :
+                                        <Avatar
+                                            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                                            size="large"
+                                        />
+                                    }
+                                    <span className='title' >{item.title}</span>
                                     <span className='description'>{item.description}</span>
                                 </Card>
+
                             )
                         })
                     }
@@ -203,7 +210,7 @@ export default class RoomPage extends Component{
             }
                     </div>
                     <div className='inputArea'>
-                        <div className='manyTools'>
+                        <div className='manyTools'  id="rampage">
                             <Icon type="smile" theme="outlined"
                                   style={{ fontSize: '30px',marginRight:15 }}/>
                             <Icon type="video-camera" theme="filled"
