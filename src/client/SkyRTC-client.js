@@ -353,7 +353,7 @@ var SkyRTC = function() {
 
 
     //消息广播
-    skyrtc.prototype.broadcast = function(message) {
+    socket.prototype.broadcast = function(message) {
         var socketId;
         for (socketId in this.dataChannels) {
             this.sendMessage(message, socketId);
@@ -361,7 +361,7 @@ var SkyRTC = function() {
     };
 
     //发送消息方法
-    skyrtc.prototype.sendMessage = function(message, socketId) {
+    socket.prototype.sendMessage = function(message, socketId) {
         if (this.dataChannels[socketId].readyState.toLowerCase() === 'open') {
             this.dataChannels[socketId].send(JSON.stringify({
                 type: "__msg",

@@ -5,6 +5,7 @@ import MessageItem from "../messageitem/messageitem";
 import './roompage.css'
 import VideoCamera from "../videocamera/videocamera";
 import io from 'socket.io-client'
+import VideoCamera2 from "../videocamera2/videocamera";
 
 const { TextArea } = Input;
 const { Search } = Input;
@@ -28,12 +29,6 @@ const content = (
     </Upload>
 );
 
-const onlinePeople=(
-    <div>
-        <Avatar shape="square" size="small" icon="user" />
-        <span className='onlineName'>Linvanuevi</span>
-    </div>
-)
 
 let listfile=[]
 export default class RoomPage extends Component{
@@ -45,14 +40,21 @@ export default class RoomPage extends Component{
         video:'none',
         isUpload:false,
         isBolder:false,
-        user:true
+        user:true,
+        startFake:0,
+        isTwo:false
     }
-
     componentDidMount() {
-        const {roomitems,index}=this.props.location.state
+        const {roomitems,index,username}=this.props.location.state
+        const {isUpload,isBolder,chosenIndex,user,startFake}=this.state
+        let msg
+        const msgArr=this.state.messageArr
+        console.log(this.props.location)
+        const flag=username==="Linvanuevi"?true:false
         this.setState({
             roomitems:roomitems,
-            chosenIndex:index
+            chosenIndex:index,
+            user:flag
         })
         io(url).on('connect', ()=>{
             console.log('connect');
@@ -62,8 +64,24 @@ export default class RoomPage extends Component{
                 })
             })
 
+        if(flag)
+            console.log("新用户d5ea4473-43c3-4dfb-94af-eea381d3848e加入房间")
+        else
+        {
+            console.log("新用户3sdsd56c-438f-45fd-baf7-sd56c28q9x4c加入房间")
+            msgArr[0]=[{
+            isMe:false,
+            name:"Linvanuevi",
+            message:"这是一条测试信息",
+            isBolder:isBolder
+        }]
+            setTimeout(()=>{
+                this.setState({
+                    messageArr:msgArr
+            })},
+                5000)
+        }
 
-        console.log("新用户d5ea4473-43c3-4dfb-94af-eea381d3848e加入房间")
     }
     handleInput = (event)=>{
         const msg=event.target.value.trim()
@@ -83,8 +101,11 @@ export default class RoomPage extends Component{
     }
     handleSend=()=>{
         const msgArr=this.state.messageArr
-        const {isUpload,isBolder,chosenIndex}=this.state
+        const {username}=this.props.location.state
+        const {isUpload,isBolder,chosenIndex,user,startFake}=this.state
         let msg
+        if(user)
+      {
         if(isUpload)
         {
             console.log("用户d5ea4473-43c3-4dfb-94af-eea381d3848e在房间__"+this.state.chosenIndex+"__请求发送文件")
@@ -97,7 +118,7 @@ export default class RoomPage extends Component{
         if(msgArr[chosenIndex]==null)
             {msgArr[chosenIndex]=[{
                 isMe:true,
-                name:"Linvanuevi",
+                name:user?"Linvanuevi":username,
                 message:msg,
                 isBolder:isBolder
                 }]
@@ -105,7 +126,7 @@ export default class RoomPage extends Component{
         else
             msgArr[chosenIndex].push({
                 isMe:true,
-                name:"Linvanuevi",
+                name:user?"Linvanuevi":username,
                 message:msg,
                 isBolder:isBolder
                 })
@@ -116,11 +137,83 @@ export default class RoomPage extends Component{
             isUpload:false,
             isBolder:false
             })
+          if(startFake===0)
+         { setTimeout(
+              ()=>{
+                  msgArr[0].push({
+                      isMe:false,
+                      name:"aaaaaaaa",
+                      message:"这也是一条测试信息啊",
+                      isBolder:isBolder
+                  })
+                  this.setState({
+                      messageArr:msgArr,
+                      isTwo:true,
+                      startFake:startFake+1
+                  })
+              },
+              8000
+          )
+         }
+          }
 
-       /* let rtc=SkyRTC()
-        rtc.broadcast(this.state.inputMessage)*/
-
-
+        else
+        {
+            if (startFake===0)
+           { msgArr[0].push({
+                isMe:true,
+                name:username,
+                message:this.state.inputMessage,
+                isBolder:isBolder
+            })
+            console.log(msgArr)
+            this.setState({
+                messageArr:msgArr,
+                inputMessage:"",
+                isUpload:false,
+                isBolder:false,
+                startFake:startFake+1
+            })
+            setTimeout(
+                ()=>{
+                    msgArr[0].push({
+                        isMe:false,
+                        name:"Linvanuevi",
+                        message:"什么什么什么什么",
+                        isBolder:isBolder
+                        })
+                    this.setState({
+                        messageArr:msgArr,
+                        })
+                    },
+                    8000
+                )}
+            else
+            {
+                if(msgArr[chosenIndex]==null)
+                {msgArr[chosenIndex]=[{
+                    isMe:true,
+                    name:user?"Linvanuevi":username,
+                    message:msg,
+                    isBolder:isBolder
+                }]
+                }
+                else
+                    msgArr[chosenIndex].push({
+                        isMe:true,
+                        name:user?"Linvanuevi":username,
+                        message:msg,
+                        isBolder:isBolder
+                    })
+                console.log(msgArr)
+                this.setState({
+                    messageArr:msgArr,
+                    inputMessage:"",
+                    isUpload:false,
+                    isBolder:false
+                })
+            }
+        }
     }
     onVideo =()=>{
         let isVideo=this.state.video
@@ -138,7 +231,30 @@ export default class RoomPage extends Component{
         })
     }
     render(){
-        const {messageArr,inputMessage,roomitems,chosenIndex,video}=this.state
+        const {messageArr,inputMessage,roomitems,chosenIndex,video,user,isTwo}=this.state
+
+        const onlinePeople=(
+            <div>
+                <p>
+                    <Avatar shape="square" size="small" icon="user" />
+                    <span className='onlineName'>Linvanuevi</span>
+                </p>
+                {
+                    user?
+                        isTwo?
+                            <p>
+                                <Avatar shape="square" size="small" icon="user" />
+                                <span className='onlineName'>aaaaaaaa</span>
+                            </p>: null
+                        :
+                        <p>
+                            <Avatar shape="square" size="small" icon="user" />
+                            <span className='onlineName'>aaaaaaa</span>
+                        </p>
+
+                }
+            </div>
+        )
         return (
             <div>
                 <div className='roomlist'>
@@ -185,7 +301,11 @@ export default class RoomPage extends Component{
                 <div className='roomContext' >
                     <div>
                         <div className='videoPart' style={{display:video}}>
-                            <VideoCamera />
+                            {
+                                user?
+                                    isTwo?<VideoCamera history={this.props.history} />:<VideoCamera2 />
+                                    :<VideoCamera history={this.props.history} />
+                            }
                         </div>
                         {
                         messageArr[chosenIndex]==null?
@@ -204,6 +324,7 @@ export default class RoomPage extends Component{
                                         message={item.message}
                                         key={index}
                                         isBolder={item.isBolder}
+                                        user={this.state.user}
                                     />
                                 )
                 })
