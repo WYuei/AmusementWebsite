@@ -6,6 +6,7 @@ import './roompage.css'
 import VideoCamera from "../videocamera/videocamera";
 import io from 'socket.io-client'
 
+
 const { TextArea } = Input;
 const { Search } = Input;
 
@@ -54,16 +55,29 @@ export default class RoomPage extends Component{
             roomitems:roomitems,
             chosenIndex:index
         })
-        io(url).on('connect', ()=>{
-            console.log('connect');
-            socket.on('messages', data => {
-                //返回用户列表
-                console.log('111')
+        const {isBolder}=this.state
+        const msgArr=this.state.messageArr
+        socket.on('chat message', (msg)=>
+            {console.log(msg)
+                if(msgArr[index]==null) //第一条信息
+                {msgArr[index]=[{
+                    isMe:false,
+                    name:"David",
+                    message:msg,
+                    isBolder:isBolder
+                }]
+                }
+                else
+                    msgArr[index].push({ //不是第一条信息
+                        isMe:false,
+                        name:"David",
+                        message:msg,
+                        isBolder:isBolder
+                    })
+                this.setState({
+                    messageArr:msgArr
                 })
-            })
-
-
-        console.log("新用户d5ea4473-43c3-4dfb-94af-eea381d3848e加入房间")
+        });
     }
     handleInput = (event)=>{
         const msg=event.target.value.trim()
@@ -94,7 +108,8 @@ export default class RoomPage extends Component{
         }
         else
             msg=this.state.inputMessage
-        if(msgArr[chosenIndex]==null)
+        socket.emit('chat message',msg)
+        if(msgArr[chosenIndex]==null) //第一条信息
             {msgArr[chosenIndex]=[{
                 isMe:true,
                 name:"Linvanuevi",
@@ -103,7 +118,7 @@ export default class RoomPage extends Component{
                 }]
             }
         else
-            msgArr[chosenIndex].push({
+            msgArr[chosenIndex].push({ //不是第一条信息
                 isMe:true,
                 name:"Linvanuevi",
                 message:msg,
@@ -116,10 +131,6 @@ export default class RoomPage extends Component{
             isUpload:false,
             isBolder:false
             })
-
-       /* let rtc=SkyRTC()
-        rtc.broadcast(this.state.inputMessage)*/
-
 
     }
     onVideo =()=>{
@@ -184,9 +195,9 @@ export default class RoomPage extends Component{
 
                 <div className='roomContext' >
                     <div>
-                        <div className='videoPart' style={{display:video}}>
+                       /* <div className='videoPart' style={{display:video}}>
                             <VideoCamera />
-                        </div>
+                        </div>*/
                         {
                         messageArr[chosenIndex]==null?
                             <div className='noMessage'>

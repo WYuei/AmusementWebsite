@@ -3,20 +3,6 @@ import {Icon} from 'antd'
 import './videocamera.css'
 export default class VideoCamera extends Component{
     componentDidMount() {
-        let pc = new RTCPeerConnection();
-        let dc = pc.createDataChannel("my channel");
-
-        dc.onmessage = function (event) {
-            console.log("received: " + event.data);
-        };
-
-        dc.onopen = function () {
-            console.log("datachannel open");
-        };
-
-        dc.onclose = function () {
-            console.log("datachannel close");
-        };
         const constraints = { audio: true,
         video: { width: 300, height: 200 } };
         navigator.mediaDevices.getUserMedia(constraints)
