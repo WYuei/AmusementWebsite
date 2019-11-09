@@ -1,16 +1,3 @@
-// getting dom elements
-let divRoompage=document.getElementById("rampage")
-divRoompage.click(()=>{
-    console.log("111222")
-})
-/*var divSelectRoom = document.getElementById("selectRoom");
-var divConsultingRoom = document.getElementById("consultingRoom");
-var inputRoomNumber = document.getElementById("roomNumber");
-var btnGoRoom = document.getElementById("goRoom");
-var localVideo = document.getElementById("localVideo");
-var remoteVideo = document.getElementById("remoteVideo");
-
-// variables
 var roomNumber;
 var localStream;
 var remoteStream;
@@ -48,7 +35,6 @@ socket.on('created', function (room) {
         console.log('An error ocurred when accessing media devices', err);
     });
 });
-
 socket.on('joined', function (room) {
     navigator.mediaDevices.getUserMedia(streamConstraints).then(function (stream) {
         localStream = stream;
@@ -58,7 +44,6 @@ socket.on('joined', function (room) {
         console.log('An error ocurred when accessing media devices', err);
     });
 });
-
 socket.on('candidate', function (event) {
     var candidate = new RTCIceCandidate({
         sdpMLineIndex: event.label,
@@ -66,7 +51,6 @@ socket.on('candidate', function (event) {
     });
     rtcPeerConnection.addIceCandidate(candidate);
 });
-
 socket.on('ready', function () {
     if (isCaller) {
         rtcPeerConnection = new RTCPeerConnection(iceServers);
@@ -88,7 +72,6 @@ socket.on('ready', function () {
             })
     }
 });
-
 socket.on('offer', function (event) {
     if (!isCaller) {
         rtcPeerConnection = new RTCPeerConnection(iceServers);
@@ -111,11 +94,9 @@ socket.on('offer', function (event) {
             })
     }
 });
-
 socket.on('answer', function (event) {
     rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(event));
 })
-
 // handler functions
 function onIceCandidate(event) {
     if (event.candidate) {
@@ -133,4 +114,4 @@ function onIceCandidate(event) {
 function onAddStream(event) {
     remoteVideo.srcObject = event.streams[0];
     remoteStream = event.stream;
-}*/
+}

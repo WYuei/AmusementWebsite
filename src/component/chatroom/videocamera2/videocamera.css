@@ -1,0 +1,11 @@
+.videos{
+    margin-left: 40px;
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 312px;
+    border: darkgray 1px solid;
+    position: relative;
+    display: inline-block;
+}
+.video{
+}

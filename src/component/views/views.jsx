@@ -6,6 +6,7 @@ import 'antd/dist/antd.css'
 import './views.css'
 import ChatRoom from "../chatroom/chartroom";
 import RoomPage from "../chatroom/roompage/roompage";
+import BigVideo from "../chatroom/videocamera2/bigvideo";
 
 const { SubMenu } = Menu;
 const { Content, Sider } = Layout;
@@ -82,6 +83,7 @@ export default class Views extends Component{
                             <Switch>
                                 <Route path='/views/chatroom' component={ChatRoom}/>
                                 <Route path='/views/roompage' component={RoomPage}/>
+                                <Route path='/views/bigvideo' component={BigVideo}/>
                                 <Redirect to={
                                     {pathname:'/views/chatroom',
                                         state:{

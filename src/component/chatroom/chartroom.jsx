@@ -108,14 +108,17 @@ class ChatRoom extends Component{
     };
 
     handleRandomIn=()=>{
+        const {username}=this.props.location.state
         const {roomdata}=this.state
+        console.log(username)
         let num=Math.random()*10%(roomdata.length)
         num=Math.floor(num)
         let path={
             pathname:'/views/roompage',
             state:{
                 roomitems:roomdata,
-                index:num
+                index:num,
+                username:username
             }
         }
         this.props.history.push(path)
@@ -157,6 +160,7 @@ class ChatRoom extends Component{
                                     history={this.props.history}
                                     index={index}
                                     roomitems={this.state.roomdata}
+                                    username={username}
                                 />
                             )
                         })
