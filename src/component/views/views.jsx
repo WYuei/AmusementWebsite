@@ -7,6 +7,7 @@ import './views.css'
 import ChatRoom from "../chatroom/chartroom";
 import RoomPage from "../chatroom/roompage/roompage";
 import BigVideo from "../chatroom/videocamera2/bigvideo";
+import ListPage from "../listpage/listpage";
 
 const { SubMenu } = Menu;
 const { Content, Sider } = Layout;
@@ -58,11 +59,15 @@ export default class Views extends Component{
                                     title={
                                         <span>
                   <Icon type="notification" />
-                  目录3
+                  Music List
                 </span>
                                     }
                                 >
-                                    <Menu.Item key="9">option</Menu.Item>
+                                    <Menu.Item key="9">
+                                        <Link to='/views/musiclist'>
+                                         music list
+                                        </Link>
+                                    </Menu.Item>
                                     <Menu.Item key="10">option</Menu.Item>
                                 </SubMenu>
                                 <SubMenu
@@ -83,12 +88,14 @@ export default class Views extends Component{
                             <Switch>
                                 <Route path='/views/chatroom' component={ChatRoom}/>
                                 <Route path='/views/roompage' component={RoomPage}/>
+                                <Route path='/views/musiclist' component={ListPage}/>
                                 <Route path='/views/bigvideo' component={BigVideo}/>
-                                <Redirect to={
+
+                               /* <Redirect to={
                                     {pathname:'/views/chatroom',
                                         state:{
                                             username:username
-                                        }}}/>
+                                        }}}/>*/
                             </Switch>
                         </Content>
                     </Layout>

@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
+const cors=require('cors');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
@@ -7,6 +9,51 @@ const port = process.env.PORT || 8080;
 
 // express routing
 app.use(express.static('public'));
+app.use(bodyParser.json())//json请求
+app.use(bodyParser.urlencoded({extended:false}));//表单请求
+app.use(cors());
+
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
+    host: '116.62.222.138',
+    user: 'aliyun',
+    password: '123456',
+    database: 'classdemo',
+    port: 3306
+});//配置数据库
+connection.connect();
+
+app.get('/',(req,res) => {
+    // 定义SQL语句
+    const sqlStr = 'select * from user'
+    connection.query(sqlStr,(err,results) => {
+
+        if(err) return res.json({err_code:1,message:'获取失败',affectedRows:0})
+        res.json(
+            new Result({data:results})
+        );
+
+    })
+})
+app.post('/', function(req, res) {
+    console.log('post............');
+    console.log(req.body.key);
+    const sqlStr = 'select * from user where id='+req.body.key
+    connection.query(sqlStr,(err,results) => {
+
+        if(err) return res.json({err_code:1,message:'获取失败',affectedRows:0})
+        res.json(
+            new Result({data:results})
+        );
+
+    })
+});
+
+function Result({code=1,msg='',data={}}){
+    this.code=code;
+    this.msg=msg;
+    this.data=data;
+}
 
 
 // signaling
