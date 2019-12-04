@@ -91,11 +91,11 @@ export default class Views extends Component{
                                 <Route path='/views/musiclist' component={ListPage}/>
                                 <Route path='/views/bigvideo' component={BigVideo}/>
 
-                               /* <Redirect to={
-                                    {pathname:'/views/chatroom',
+                                <Redirect to={
+                                    {pathname:'/views/musiclist',
                                         state:{
                                             username:username
-                                        }}}/>*/
+                                        }}}/>
                             </Switch>
                         </Content>
                     </Layout>

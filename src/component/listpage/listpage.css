@@ -1,0 +1,45 @@
+.ant-carousel .slick-slide {
+    text-align: center;
+    height: 100px;
+    line-height: 100px;
+    background: #262626;
+    overflow: hidden;
+}
+
+.ant-carousel .slick-slide h3 {
+    color: #fff;
+}
+.musicRankTitle{
+    white-space: nowrap;
+}
+.musicRankTitlePic
+{
+    width: 200px;
+    height: 200px;
+    background-image: url("../../img/intro-bg.jpg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+}
+.musicRankTitle h2{
+    position:relative;
+    top: 40px;
+    left:250px;
+}
+.horseLight{
+    width: 1000px;
+    height: 100px;
+    margin-top: 130px;
+    margin-bottom: 20px;
+}
+.songContent{
+    background: white;
+    width: 500px;
+    height: 700px;
+    position: absolute;
+    top: 60px;
+    left: 1300px;
+    border: black 1px solid;
+    overflow-y:auto
+}
