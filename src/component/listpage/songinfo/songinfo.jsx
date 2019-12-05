@@ -1,5 +1,8 @@
 import React,{Component} from 'react'
+import {Icon,Rate} from "antd";
 import './songinfo.css'
+import CommentItem from "./comments/commentitem";
+const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
 export default class SongInfo extends Component{
     state={
         word:'',
@@ -9,8 +12,10 @@ export default class SongInfo extends Component{
         tags:'',
         vocal:'',
         rhyme:'',
-        wordCreatedby:''
+        wordCreatedby:'',
+        value: 3,
     }
+
    componentDidMount() {
        fetch('http://localhost:8080/singword/',
            {
@@ -53,10 +58,14 @@ export default class SongInfo extends Component{
            .catch(e => console.log('错误:', e))
    }
 
+    handleChange = value => {
+        this.setState({ value });
+    };
     render(){
-        const {word,title,artist,posturl,tags,vocal,rhyme,wordCreatedby}=this.state
+        const {word,title,artist,posturl,tags,vocal,rhyme,wordCreatedby,value}=this.state
         return (
-            <pre className='infoContent'>
+            <div>
+                <pre className='infoContent'>
                     <p className='songTITLE'>
                         {title}
                     </p>
@@ -70,7 +79,22 @@ export default class SongInfo extends Component{
                         {tags}
                     </p>
                     {word}
-            </pre>
+                </pre>
+                <div>
+                    <span>
+                        <Rate tooltips={desc} onChange={this.handleChange} value={value} />
+                         {value ? <span className="ant-rate-text">{desc[value - 1]}</span> : ''}
+                    </span>
+                    <Rate disabled defaultValue={2} />
+                    <Icon type="heart" style={{ fontSize: '30px',marginRight:15,float:"right" }} />
+                    <Icon type="like" style={{ fontSize: '30px',marginRight:15,float:"right" }}/>
+                </div>
+                <div>
+                    <CommentItem/>
+                    <CommentItem/>
+                </div>
+            </div>
+
         )
     }
 }

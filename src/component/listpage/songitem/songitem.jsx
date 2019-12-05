@@ -6,6 +6,27 @@ export default class SongItem extends Component{
         const {rankNumber,updateInfoIndex}=this.props
         updateInfoIndex(rankNumber)
     }
+    addHeart=()=>{
+        const {rankNumber,username}=this.props
+        fetch('http://localhost:8080/userlikes/add',
+            {
+                method: "POST",
+                mode: "cors",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: 'name='+username+rankNumber
+            }
+        )
+            .then(res => res.json())
+            .then(res =>
+            {
+               let msg=res.msg
+                console.log(msg)
+
+            })
+            .catch(e => console.log('错误:', e))
+    }
     render(){
         const {rankNumber,songname,artist,time,url,poster}=this.props
         return (
@@ -22,7 +43,9 @@ export default class SongItem extends Component{
                         <a onClick={this.handleClick}>
                             <Icon type="more"  style={{ fontSize: '30px',marginRight:15,float:"right"  }}/>
                         </a>
+                        <a onClick={this.addHeart}>
                         <Icon type="heart" style={{ fontSize: '30px',marginRight:15,float:"right" }} />
+                        </a>
                         <a href={url} target="_blank">
                         <Icon type="link"  style={{ fontSize: '30px',marginRight:15,float:"right"  }}/>
                         </a>

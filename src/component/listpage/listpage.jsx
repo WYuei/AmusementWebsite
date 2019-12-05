@@ -16,16 +16,17 @@ export default class ListPage extends Component{
                 time:'Loading',
                 url:'Loading',
                 posterurl:'Loading'
-            }
+            },
         ]
     }
     componentDidMount() {
         fetch('http://localhost:8080/musicRank')
             .then(res => res.json())
-            .then(data =>
+            .then(res =>
             {
+                    console.log(res)
                     this.setState({
-                        musicList:data.data
+                        musicList:res.data
                     });
 
             })
@@ -37,29 +38,10 @@ export default class ListPage extends Component{
             chosenIndex:index
         })
     }
-    handleSql=()=>{
-        fetch('http://localhost:8080/',
-            {
-                method: "POST",
-                mode: "cors",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                body: 'key='+this.state.num
-            }
-            )
-            .then(res => res.json())
-            .then(data =>
-            {   console.log(data)
-                this.setState(
-                    {
-                        sqlArr:data.data
-                    }
-                )
-            })
-            .catch(e => console.log('错误:', e))
-    }
+
     render(){
+        const data= this.props.location.state;
+        const {username}=data;
         const {musicList}=this.state
         console.log(musicList)
         return (
@@ -99,6 +81,7 @@ export default class ListPage extends Component{
                                         url={item.url}
                                         poster={item.posterurl}
                                         updateInfoIndex={this.updateInfoIndex}
+                                        username={username}
                                     />
                                 )
                    }

@@ -40,6 +40,20 @@ app.get('/',(req,res) => {
 app.get('/musicRank',(req,res) => {
     // 定义SQL语句
     const sqlStr = 'select * from musicRank'
+    console.log('aa')
+    connection.query(sqlStr,(err,results) => {
+
+        if(err) return res.json({err_code:1,message:err,affectedRows:0})
+        res.json(
+            new Result({data:results})
+        );
+        console.log('申请音乐榜单成功！');
+
+    })
+})
+app.post('/', function(req, res) {
+    console.log(req.body.key);
+    const sqlStr = 'select * from songTags where songID='+req.body.key
     connection.query(sqlStr,(err,results) => {
 
         if(err) return res.json({err_code:1,message:'获取失败',affectedRows:0})
@@ -48,16 +62,37 @@ app.get('/musicRank',(req,res) => {
         );
 
     })
-})
-app.post('/', function(req, res) {
-    console.log('post............');
-    console.log(req.body.key);
-    const sqlStr = 'select * from songTags where songID='+req.body.key
+});
+
+app.post('/userlikes', function(req, res) {
+    console.log(req.body.name);
+    const sqlStr = "select * from userlike where username='"+req.body.name.trim()+"'";
     connection.query(sqlStr,(err,results) => {
 
-        if(err) return res.json({err_code:1,message:'获取失败',affectedRows:0})
+        if(err) return res.json({err_code:1,message:err,affectedRows:0})
         res.json(
             new Result({data:results})
+        );
+
+    })
+});
+
+app.post('/userlikes/add', function(req, res) {
+
+
+    const Regex=/\d/;
+    let matchResult=req.body.name.match(Regex);
+    matchResult=matchResult[0]-'0';
+
+    let nameResult=req.body.name.replace(Regex,"");
+    let sqlStr ="insert into userlike(username,alike) VALUES ('"+nameResult.trim()+"',"+ matchResult+")";
+    console.log(sqlStr);
+    console.log(matchResult);
+    connection.query(sqlStr,(err,results) => {
+
+        if(err) return res.json({err_code:1,message:err,affectedRows:0})
+        res.json(
+            new Result({msg:'insert done'})
         );
 
     })
@@ -74,9 +109,8 @@ app.post('/singword/', function(req, res) {
             console.log(err);
         }else {
             str = fr;
-            console.log(str)
-
             console.log(req.body.key);
+            console.log('打开歌词文件成功！');
             const sqlStr = 'select * from songTags where songID='+req.body.key
             connection.query(sqlStr,(err,results) => {
 
@@ -85,6 +119,7 @@ app.post('/singword/', function(req, res) {
                     new Result({msg:str,
                         data:results})
                 );
+                console.log('申请歌词对应作曲、标签等成功！');
 
             })
         }

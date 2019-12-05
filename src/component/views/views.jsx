@@ -8,6 +8,7 @@ import ChatRoom from "../chatroom/chartroom";
 import RoomPage from "../chatroom/roompage/roompage";
 import BigVideo from "../chatroom/videocamera2/bigvideo";
 import ListPage from "../listpage/listpage";
+import UserPage from "../userpage/userpage";
 
 const { SubMenu } = Menu;
 const { Content, Sider } = Layout;
@@ -40,7 +41,15 @@ export default class Views extends Component{
                             >
                                 <SubMenu
                                     key="sub1"
-                                    title={<span><Icon type="user" />目录1</span>}>
+                                    title={<span><Icon type="user" />userInfo</span>}>
+                                    <Menu.Item key="1">
+                                        <Link to={
+                                        {pathname:'/user',
+                                            state:{
+                                                username:username
+                                            }}}>{username}</Link>
+                                    </Menu.Item>
+
                                 </SubMenu>
                                 <SubMenu
                                     key="sub2"
@@ -64,7 +73,11 @@ export default class Views extends Component{
                                     }
                                 >
                                     <Menu.Item key="9">
-                                        <Link to='/views/musiclist'>
+                                        <Link to={
+                                            {pathname:'/views/musiclist',
+                                                state:{
+                                                    username:username
+                                                }}}>
                                          music list
                                         </Link>
                                     </Menu.Item>
@@ -90,7 +103,7 @@ export default class Views extends Component{
                                 <Route path='/views/roompage' component={RoomPage}/>
                                 <Route path='/views/musiclist' component={ListPage}/>
                                 <Route path='/views/bigvideo' component={BigVideo}/>
-
+                                <Route path='/user' component={UserPage}/>
                                 <Redirect to={
                                     {pathname:'/views/musiclist',
                                         state:{
