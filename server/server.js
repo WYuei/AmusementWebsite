@@ -66,7 +66,7 @@ app.post('/', function(req, res) {
 
 app.post('/userlikes', function(req, res) {
     console.log(req.body.name);
-    const sqlStr = "select * from userlike where username='"+req.body.name.trim()+"'";
+    const sqlStr = "select * from usersong where username='"+req.body.name.trim()+"'";
     connection.query(sqlStr,(err,results) => {
 
         if(err) return res.json({err_code:1,message:err,affectedRows:0})

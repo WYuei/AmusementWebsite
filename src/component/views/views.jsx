@@ -105,7 +105,7 @@ export default class Views extends Component{
                                 <Route path='/views/bigvideo' component={BigVideo}/>
                                 <Route path='/user' component={UserPage}/>
                                 <Redirect to={
-                                    {pathname:'/views/musiclist',
+                                    {pathname:'/user',
                                         state:{
                                             username:username
                                         }}}/>
