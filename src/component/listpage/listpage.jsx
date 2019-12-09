@@ -82,6 +82,7 @@ export default class ListPage extends Component{
                                         poster={item.posterurl}
                                         updateInfoIndex={this.updateInfoIndex}
                                         username={username}
+                                        history={this.props.history}
                                     />
                                 )
                    }

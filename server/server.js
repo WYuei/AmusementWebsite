@@ -98,6 +98,26 @@ app.post('/userlikes/add', function(req, res) {
     })
 });
 
+app.post('/userlikes/delete', function(req, res) {
+
+
+    const Regex=/\d/;
+    let matchResult=req.body.name.match(Regex);
+    matchResult=matchResult[0]-'0';
+
+    let nameResult=req.body.name.replace(Regex,"");
+    let sqlStr ="delete from userlike where username='"+nameResult.trim()+"' and alike="+ matchResult;
+    console.log(sqlStr);
+    console.log(matchResult);
+    connection.query(sqlStr,(err,results) => {
+
+        if(err) return res.json({err_code:1,message:err,affectedRows:0})
+        res.json(
+            new Result({msg:'insert done'})
+        );
+
+    })
+});
 
 app.post('/singword/', function(req, res) {
     console.log('reading singword...');

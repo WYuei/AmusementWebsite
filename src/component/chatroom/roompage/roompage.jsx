@@ -50,13 +50,20 @@ export default class RoomPage extends Component{
     }
 
     componentDidMount() {
-        const {roomitems,index}=this.props.location.state
+        const {roomitems,index,msg}=this.props.location.state
         this.setState({
             roomitems:roomitems,
             chosenIndex:index
         })
         const {isBolder}=this.state
         const msgArr=this.state.messageArr
+        if(msg)
+            msgArr[index]=[{
+                isMe:true,
+                name:"Linvanuevi",
+                message:msg,
+                isBolder:isBolder
+            }]
         socket.on('chat message', (msg)=>
             {console.log(msg)
                 if(msgArr[index]==null) //第一条信息
@@ -195,9 +202,9 @@ export default class RoomPage extends Component{
 
                 <div className='roomContext' >
                     <div>
-                       /* <div className='videoPart' style={{display:video}}>
+                        <div className='videoPart' style={{display:video}}>
                             <VideoCamera />
-                        </div>*/
+                        </div>
                         {
                         messageArr[chosenIndex]==null?
                             <div className='noMessage'>

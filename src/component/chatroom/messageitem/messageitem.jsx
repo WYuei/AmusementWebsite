@@ -18,6 +18,11 @@ export default class MessageItem extends Component{
                      style={{fontWeight:isBolder?'bold':'normal'}}
                 >
                     {message}
+                    <br/>
+                    {message[0]==='['?
+                        <audio src={require('../../../music/asong.mp3')} controls="controls" style={{width:220,backgroundColor:(34,187,255)}} >
+                            Your browser does not support the audio element.
+                        </audio>:null}
                 </div>
             </div>
                 :
@@ -25,6 +30,11 @@ export default class MessageItem extends Component{
                     <div className='messageContextRight'
                          style={{fontWeight:isBolder?'bold':'normal'}}>
                         {message}
+                        <br/>
+                        {message[0]==='['?
+                            <audio src={require('../../../music/asong.mp3')} controls="controls" style={{width:220}} >
+                                Your browser does not support the audio element.
+                            </audio>:null}
                     </div>
                     <div className='avatar'>
                         <span className='personNameRight'>{name}</span>

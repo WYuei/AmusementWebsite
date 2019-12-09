@@ -91,7 +91,9 @@ export default class Player extends Component{
                 <Time currentTime={this.state.currentTime} currentTotalTime={this.state.currentTotalTime} />
 
                 {/* 音频控件  */}
-                <audio muted id="audio" src={require('../../../music/asong.mp3')}></audio>
+                <audio id="audio" src={require('../../../music/asong.mp3')} >
+                    Your browser does not support the audio element.
+                </audio>
             </div>
         )
     }
