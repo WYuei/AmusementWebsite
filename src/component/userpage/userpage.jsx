@@ -1,9 +1,13 @@
 import React,{Component} from 'react'
+import {Icon} from 'antd'
 import LikesItem from "./likesitem/likesitem";
 import Player from "./Player/player";
+import './userpage.css'
+import drawform from "./draweformer/drawform";
 export default class UserPage extends Component{
     state={
-        data:[]
+        data:[],
+        personality:'这个人很懒，还什么都没有写~',
     }
     componentDidMount() {
         const data= this.props.location.state;
@@ -34,18 +38,44 @@ export default class UserPage extends Component{
     }
 
 
-
     render(){
-        const {data}=this.state
+        const {data,personality}=this.state
+        const usernamedata= this.props.location.state;
+        const {username}=usernamedata;
         return (
             <div>
-               <ul>
+                <div className='userInfo'>
+                    <img  src={require('../../img/1.jpg')}style={{width:150,height:150,borderRadius:5 }}/>
+                    <span className='usernameShow'> {username}
+                    <Icon type="form" style={{fontSize:20,marginLeft:10}}/>
+                    </span>
+                    <span className='personality'> {personality}</span>
+                    <Icon className='editIcon' type="edit" />
+                    <div className='linkIcon'>
+                        <Icon className='icon_link' type="github" />
+                        <Icon className='icon_link' type="weibo" />
+                        <Icon className='icon_link' type="qq" />
+                        <Icon className='icon_link' type="zhihu" />
+                    </div>
+                    <div className='likesNum'>
+                        <span className='likeNum'>3</span>
+                        <Icon className='likesNumIcon' type="heart" theme="filled" />
+                        <span className='likeText'>已喜欢</span>
+                    </div>
+                </div>
+               <ul className='likelist'>
+                   <span className='listTitle'>我喜欢的音乐</span><br/><br/>
                    {
                        data.map((item,index)=>
-                           <li key={index}>
-                               {item.muciName}
+                           <li className={index%2===0?'evenli':'oddli'}
+                               key={index}>
+                               <Icon className='heartinlistIcon' type="heart" theme="filled" />
+
+                               {item.muciName} /
                                {item.SingerName}
                                {item.ID}
+                               <Icon className='playinlistIcon' type="caret-right" />
+                               <Icon className='shareinlistIcon' type="share-alt" />
                                <a onClick={this.handleClick=()=>{
                                    const usernamedata= this.props.location.state;
                                    const {username}=usernamedata;
@@ -66,16 +96,12 @@ export default class UserPage extends Component{
                                            console.log(msg)
                                        })
                                        .catch(e => console.log('错误:', e))
-                               }}>delete</a>
+                               }}><Icon className='closeinlistIcon' type="close" /></a>
                            </li>
                        )
                    }
                </ul>
-                <audio src={require('../../music/asong.mp3')} controls="controls" >
-                    Your browser does not support the audio element.
-                </audio>
                 <Player/>
-                <button onClick={this.aaa}>test</button>
             </div>
         )
     }

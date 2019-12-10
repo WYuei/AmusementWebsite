@@ -1,9 +1,87 @@
 .player{
-    width: 20%;
-    border: black 1px solid;
+    padding: 10px;
+    border-top:1px #cccccc solid;
+    width: 1580px;
+    position:absolute;
+    left: 250px;
+    bottom: 90px;
+    height: 100px;
 }
 .play{
-    border: black 1px solid;
-    width: 100px;
-    height: 100px;
+    width: 40px;
+    height: 40px;
+    float: left;
+}
+.previous{
+    float: left;
+}
+.next{
+    float:left;
+}
+.controls{
+    position: absolute;
+    left:150px;
+    top: 40px;
+}
+.progressParent{
+    position: absolute;
+    top: 75px;
+    left: 380px;
+    width: 750px;
+    height: 5px;
+    background-color:#dddddd;
+}
+.progress
+{
+    float: left;
+    background-color: rgba(207,80,34,0.7);
+    height: 5px;
+}
+.iconprogress{
+    margin-left: -8px;
+    right: 0px;
+}
+.playIcon{
+    color: rgb(207,80,34);
+}
+.preIcon{
+    color: rgb(207,80,34);
+    margin-top: 5px;
+    margin-right: 20px;
+}
+.nextIcon{
+    color:rgb(207,80,34);
+    margin-top: 5px;
+    margin-left: 30px;
+}
+.trackInfo{
+    position: absolute;
+    top: 20px;
+    left: 380px;
+    font-size: larger;
+}
+.name{
+    float: left;
+    margin-right:600px ;
+}
+.icons{
+    position: absolute;
+    top: 40px;
+    right: 50px;
+}
+.heartIcon{
+    font-size: 30px;
+    color:rgb(207,80,34);
+    margin-right: 30px;
+}
+.orderIcon{
+    font-size: 30px;
+    margin-right: 30px;
+}
+.soundIcon{
+    font-size: 30px;
+    margin-right: 30px;
+}
+.menuIcon{
+    font-size: 30px;
 }

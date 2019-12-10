@@ -1,0 +1,91 @@
+.userInfo{
+    border-bottom: 1px black solid;
+    position: relative;
+    padding: 20px;
+    background-color: whitesmoke;
+}
+.usernameShow{
+    position: absolute;
+    left: 210px;
+    top: 5px;
+    font-weight: bold;
+    font-size: 30px;
+    font-family: "微软雅黑 Light";
+}
+.personality{
+
+    margin-left: 55px;
+    top: 90px;
+    font-size: 18px;
+}
+.editIcon
+{
+    font-size: 17px
+}
+.linkIcon{
+    position: absolute;
+    top: 130px;
+    left: 230px;
+}
+.icon_link{
+    font-size: 29px;
+    margin-right: 20px;
+}
+
+.likesNum{
+    position: absolute;
+    top: 30px;
+    right: 80px;
+    width: 90px;
+}
+.likeNum{
+    position: absolute;
+    left: 20px;
+    font-size: 30px;
+}
+.likesNumIcon{
+    position: absolute;
+    top: 30px;
+    font-size: 30px;
+    color:rgb(207,80,34);
+}
+.likeText{
+    position: absolute;
+    top: 50px;
+    left: -15px;
+    font-size: 20px;
+    color:rgb(207,80,34);
+}
+
+.listTitle{
+    font-size: 30px;
+    margin-left: 0px;
+}
+.likelist{
+    width: 50%;
+    list-style-type:none;
+    float: left;
+    padding: 20px;
+}
+.evenli{
+    background-color: #e8e8e8;
+}
+.oddli{
+    background-color: whitesmoke;
+}
+.likelist li{
+    height: 45px;
+    line-height: 45px;
+    font-size: 18px;
+    padding-left: 20px;
+}
+.heartinlistIcon{
+    font-size: 20px;
+    color:rgb(207,80,34);
+    margin-right: 20px;
+}
+.shareinlistIcon{
+    font-size: 30px;
+}
+.playinlistIcon{
+}

@@ -1,4 +1,5 @@
 import React,{Component} from 'react'
+import {Icon,message} from 'antd'
 import './player.css'
 export default class Player extends Component{
     state={
@@ -44,7 +45,7 @@ export default class Player extends Component{
     }
     previous=()=>{
         if(this.state.currentTrackIndex - 1 < 0){
-            alert('已经没有上一首了');
+            message.error('已经没有上一首了，快对播放列表进行填装~！');
         }else{
             this.setState({currentTrackIndex:--this.state.currentTrackIndex},()=>{
                 this.updatePlayStatus();
@@ -53,7 +54,7 @@ export default class Player extends Component{
     }
     next =()=>{
         if(this.state.currentTrackIndex + 1 >=  this.state.currentTrackLen){
-            alert('已经没有下一首了');
+            message.error('已经没有下一首了，快对播放列表进行填装~！');
         }else{
             this.setState({currentTrackIndex:++this.state.currentTrackIndex},()=>{
                 this.updatePlayStatus();
@@ -64,7 +65,8 @@ export default class Player extends Component{
         this.updatePlayStatus();
         setInterval(()=>{
             let audio = document.getElementById('audio');
-            this.setState({currentTime:audio.currentTime},()=>{
+            if(this.state.playStatus)
+                this.setState({currentTime:audio.currentTime},()=>{
                 if(~~this.state.currentTime >= ~~this.state.currentTotalTime){
                     this.next();
                 }
@@ -73,13 +75,17 @@ export default class Player extends Component{
     }
 
     render(){
+        const  poster='http://cdnmusic.migu.cn/picture/2019/1202/2335/ASe1b6eb16a4d9405ab2239e11c5821eb4.jpg'
         return (
             <div className="player">
-                {/* 播放器名称  */}
-                <div className="header">音乐播放器.React版</div>
 
-                {/* 音乐信息  */}
-                <TrackInfo track={this.state.tracks} />
+                <div className='musicPost'>
+                    <img src={poster} style={{width:100,height:100}}/>
+                </div>
+                <div className='trackInfo'>
+                    <div className="name">{this.state.tracks.name} / {this.state.tracks.artists[0].name}</div>
+                    <Time currentTime={this.state.currentTime} currentTotalTime={this.state.currentTotalTime} />
+                </div>
 
                 {/* 播放进度条   */}
                 <Progress progress={this.state.currentTime / this.state.currentTotalTime * 100 + '%'} />
@@ -87,9 +93,12 @@ export default class Player extends Component{
                 {/* 播放控制  */}
                 <Controls isPlay={this.state.playStatus} onPlay={this.play} onPrevious={this.previous} onNext={this.next} />
 
-                {/* 播放时间   */}
-                <Time currentTime={this.state.currentTime} currentTotalTime={this.state.currentTotalTime} />
-
+                <div className='icons'>
+                    <Icon className='heartIcon' type="heart" theme="filled" />
+                    <Icon className='orderIcon' type="ordered-list" />
+                    <Icon className='soundIcon' type="sound" />
+                    <Icon className='menuIcon' type="menu-unfold" />
+                </div>
                 {/* 音频控件  */}
                 <audio id="audio" src={require('../../../music/asong.mp3')} >
                     Your browser does not support the audio element.
@@ -99,45 +108,35 @@ export default class Player extends Component{
     }
 }
 
-class TrackInfo extends Component{
-    render() {
-        return (
-            <div>
-                <div className="albumPic" style={{'backgroundImage':'url('+ this.props.track.album.picUrl +')'}}></div>
-                <div className='trackInfo'>
-                    <div className="name">{this.props.track.name}</div>
-                    <div className="artist">{this.props.track.artists[0].name}</div>
-                    <div className="album">{this.props.track.album.name}</div>
-                </div>
-            </div>
-        );
-    }
-}
 class Progress extends Component{
     render() {
         return(
-            <div className="progress" style={{'width':this.props.progress}}></div>
+            <div className="progressParent">
+                <div className="progress" style={{'width':this.props.progress}}></div>
+                <Icon className='iconprogress' type="heat-map" />
+            </div>
         )
     }
 }
 class Controls extends Component{
     render() {
-        let className;
+        let type;
         if(this.props.isPlay === true){
-            className = 'icon-pause';
+            type = 'play-circle';
         }else{
-            className = 'icon-play';
+            type = 'pause-circle';
         }
         return (
             <div className="controls">
-                <div className="play" onClick={this.props.onPlay}>
-                    <i className={className}></i>
-                </div>
+
                 <div className="previous" onClick={this.props.onPrevious}>
-                    <i className="icon-previous"></i>
+                    <Icon className='preIcon' type="step-backward" style={{fontSize:40}} />
+                </div>
+                <div className="play" onClick={this.props.onPlay}>
+                    <Icon className='playIcon' type={type} theme="filled" style={{fontSize:50}} />
                 </div>
                 <div className="next" onClick={this.props.onNext}>
-                    <i className="icon-next"></i>
+                    <Icon className='nextIcon' type="step-forward" style={{fontSize:40}}/>
                 </div>
             </div>
         )
@@ -158,8 +157,7 @@ class Time extends Component{
     render() {
         return(
             <div className="time">
-                <div className="current">{this.timeConvert(this.props.currentTime)}</div>
-                <div className="total">{this.timeConvert(this.props.currentTotalTime)}</div>
+                <div className="current">{this.timeConvert(this.props.currentTime)}/{this.timeConvert(this.props.currentTotalTime)}</div>
             </div>
         )
     }
