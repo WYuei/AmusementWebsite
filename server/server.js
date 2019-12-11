@@ -51,6 +51,35 @@ app.get('/musicRank',(req,res) => {
 
     })
 })
+
+app.get('/movieList',(req,res) => {
+    // 定义SQL语句
+    const sqlStr = 'select * from movieHOT'
+    console.log('aa')
+    connection.query(sqlStr,(err,results) => {
+
+        if(err) return res.json({err_code:1,message:err,affectedRows:0})
+        res.json(
+            new Result({data:results})
+        );
+        console.log('申请电影各种巴拉巴拉成功！');
+
+    })
+})
+
+app.get('/movieWanted',(req,res) => {
+    // 定义SQL语句
+    const sqlStr = 'select * from movieWanted'
+    connection.query(sqlStr,(err,results) => {
+
+        if(err) return res.json({err_code:1,message:err,affectedRows:0})
+        res.json(
+            new Result({data:results})
+        );
+        console.log('申请期待电影榜单成功！');
+
+    })
+})
 app.post('/', function(req, res) {
     console.log(req.body.key);
     const sqlStr = 'select * from songTags where songID='+req.body.key
@@ -80,12 +109,33 @@ app.post('/userlikes', function(req, res) {
 app.post('/userlikes/add', function(req, res) {
 
 
-    const Regex=/\d/;
+    const Regex=/\d+/;
     let matchResult=req.body.name.match(Regex);
     matchResult=matchResult[0]-'0';
 
     let nameResult=req.body.name.replace(Regex,"");
     let sqlStr ="insert into userlike(username,alike) VALUES ('"+nameResult.trim()+"',"+ matchResult+")";
+    console.log(sqlStr);
+    console.log(matchResult);
+    connection.query(sqlStr,(err,results) => {
+
+        if(err) return res.json({err_code:1,message:err,affectedRows:0})
+        res.json(
+            new Result({msg:'insert done'})
+        );
+
+    })
+});
+
+app.post('/movielike/add', function(req, res) {
+
+
+    const Regex=/\d+/;
+    let matchResult=req.body.name.match(Regex);
+    matchResult=matchResult[0]-'0';
+
+    let nameResult=req.body.name.replace(Regex,"");
+    let sqlStr ="insert into movielike(username,alike) VALUES ('"+nameResult.trim()+"',"+ matchResult+")";
     console.log(sqlStr);
     console.log(matchResult);
     connection.query(sqlStr,(err,results) => {

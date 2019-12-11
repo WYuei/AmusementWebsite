@@ -1,0 +1,60 @@
+.top{
+    width: 80%;
+    height: 100px;
+    border: 1px solid black;
+}
+.left
+{
+    float: left;
+    width: 1000px;
+
+    border:1px solid black;
+}
+.right{
+    float: right;
+    width: 400px;
+    border:1px solid black;
+
+}
+.LT1{
+    width: 1000px;
+    height: 500px;
+    border:1px solid black;
+}
+.LT2{
+    width: 1000px;
+
+    border:1px solid black;
+}
+.LT3{
+    width: 1000px;
+
+    border:1px solid black;
+}
+.movieItem{
+    float: left;
+    margin: 20px;
+    position: relative;
+}
+.movieItem img{
+    width: 200px;
+}
+.movieItem img:hover{
+
+    box-shadow:gray 1px 1px 3px 3px ;
+}
+.infoText{
+    width: 200px;
+    position: absolute;
+    top: 20px;
+    background-color: black;
+    opacity: 0.5;
+    color: white;
+    font-size: 15px
+}
+.movieIcons{
+    position: absolute;
+    top: 280px;
+    right: 20px;
+    font-size: 25px;
+}

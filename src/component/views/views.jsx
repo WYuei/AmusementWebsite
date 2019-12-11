@@ -9,6 +9,7 @@ import RoomPage from "../chatroom/roompage/roompage";
 import BigVideo from "../chatroom/videocamera2/bigvideo";
 import ListPage from "../listpage/listpage";
 import UserPage from "../userpage/userpage";
+import MovieListPage from "../movieList/movielistpage";
 
 const { SubMenu } = Menu;
 const { Content, Sider } = Layout;
@@ -41,7 +42,7 @@ export default class Views extends Component{
                             >
                                 <SubMenu
                                     key="sub1"
-                                    title={<span><Icon type="user" />userInfo</span>}>
+                                    title={<span><Icon type="user" />用户中心</span>}>
                                     <Menu.Item key="1">
                                         <Link to={
                                         {pathname:'/user',
@@ -49,51 +50,43 @@ export default class Views extends Component{
                                                 username:username
                                             }}}>{username}</Link>
                                     </Menu.Item>
-
                                 </SubMenu>
                                 <SubMenu
                                     key="sub2"
-                                    title={<span><Icon type="laptop" />Chat Room</span>}>
+                                    title={<span><Icon type="laptop" />在线聊天</span>}>
                                     <Menu.Item key="5"><Link to={
                                             {pathname:'/views/chatroom',
                                             state:{
                                                 username:username
-                                            }}}>Room List
-
+                                            }}}>聊天室
                                         </Link>
                                     </Menu.Item>
                                 </SubMenu>
                                 <SubMenu
                                     key="sub3"
-                                    title={
-                                        <span>
-                  <Icon type="notification" />
-                  Music List
-                </span>
-                                    }
-                                >
+                                    title={<span><Icon type="notification" />音乐榜单</span>}>
                                     <Menu.Item key="9">
                                         <Link to={
                                             {pathname:'/views/musiclist',
                                                 state:{
                                                     username:username
                                                 }}}>
-                                         music list
+                                         最in音乐榜
                                         </Link>
                                     </Menu.Item>
-                                    <Menu.Item key="10">option</Menu.Item>
                                 </SubMenu>
                                 <SubMenu
                                     key="sub4"
-                                    title={
-                                        <span>
-                  <Icon type="bar-chart" />
-                  目录4
-                </span>
-                                    }
-                                >
-                                    <Menu.Item key="11">option</Menu.Item>
-                                    <Menu.Item key="12">option</Menu.Item>
+                                    title={<span><Icon type="bar-chart" />电影资讯</span>}                                >
+                                    <Menu.Item key="11">
+                                        <Link to={
+                                            {pathname:'/views/movielist',
+                                                state:{
+                                                    username:username
+                                                }}}>
+                                        猫眼电影
+                                        </Link>
+                                    </Menu.Item>
                                 </SubMenu>
                             </Menu>
                         </Sider>
@@ -103,9 +96,10 @@ export default class Views extends Component{
                                 <Route path='/views/roompage' component={RoomPage}/>
                                 <Route path='/views/musiclist' component={ListPage}/>
                                 <Route path='/views/bigvideo' component={BigVideo}/>
+                                <Route path='/views/movielist' component={MovieListPage}/>
                                 <Route path='/user' component={UserPage}/>
                                 <Redirect to={
-                                    {pathname:'/user',
+                                    {pathname:'/views/movielist',
                                         state:{
                                             username:username
                                         }}}/>
