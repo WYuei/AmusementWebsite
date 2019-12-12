@@ -6,6 +6,7 @@
     left: 250px;
     bottom: 90px;
     height: 100px;
+    z-index: 500;
 }
 .play{
     width: 40px;

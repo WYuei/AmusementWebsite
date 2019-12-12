@@ -106,6 +106,19 @@ app.post('/userlikes', function(req, res) {
     })
 });
 
+app.post('/movielike', function(req, res) {
+    console.log(req.body.name);
+    const sqlStr = "select * from usermovie where username='"+req.body.name.trim()+"'";
+    connection.query(sqlStr,(err,results) => {
+
+        if(err) return res.json({err_code:1,message:err,affectedRows:0})
+        res.json(
+            new Result({data:results})
+        );
+
+    })
+});
+
 app.post('/userlikes/add', function(req, res) {
 
 
@@ -126,6 +139,7 @@ app.post('/userlikes/add', function(req, res) {
 
     })
 });
+
 
 app.post('/movielike/add', function(req, res) {
 
@@ -151,7 +165,7 @@ app.post('/movielike/add', function(req, res) {
 app.post('/userlikes/delete', function(req, res) {
 
 
-    const Regex=/\d/;
+    const Regex=/\d+/;
     let matchResult=req.body.name.match(Regex);
     matchResult=matchResult[0]-'0';
 

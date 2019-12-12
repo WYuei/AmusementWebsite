@@ -77,7 +77,7 @@ export default class Player extends Component{
     render(){
         const  poster='http://cdnmusic.migu.cn/picture/2019/1202/2335/ASe1b6eb16a4d9405ab2239e11c5821eb4.jpg'
         return (
-            <div className="player">
+            <div className="player" style={{zIndex:100}}>
 
                 <div className='musicPost'>
                     <img src={poster} style={{width:100,height:100}}/>

@@ -35,7 +35,7 @@
 .likesNum{
     position: absolute;
     top: 30px;
-    right: 80px;
+    right: 250px;
     width: 90px;
 }
 .likeNum{
@@ -57,12 +57,39 @@
     color:rgb(207,80,34);
 }
 
+
+.likesNum2{
+    position: absolute;
+    top: 30px;
+    right: 80px;
+    width: 90px;
+}
+.likeNum2{
+    position: absolute;
+    left: 20px;
+    font-size: 30px;
+}
+.likesNumIcon2{
+    position: absolute;
+    top: 30px;
+    font-size: 30px;
+    color:rgb(207,80,34);
+}
+.likeText2{
+    position: absolute;
+    top: 50px;
+    left: -15px;
+    font-size: 20px;
+    color:rgb(207,80,34);
+}
+
 .listTitle{
     font-size: 30px;
     margin-left: 0px;
+    border-bottom: 2px solid #dddddd;
 }
 .likelist{
-    width: 50%;
+    width: 700px;
     list-style-type:none;
     float: left;
     padding: 20px;
@@ -88,4 +115,24 @@
     font-size: 30px;
 }
 .playinlistIcon{
+}
+.musiclistDiv{
+    float:left;
+    position: relative;
+}
+.movielistDiv{
+    float:left;
+    margin-left: 40px;
+    width: 400px;
+    position: relative;
+}
+.cardItem{
+    float: left;
+    margin-top: 4px;
+    margin-right: 15px;
+    width: 140px;
+}
+.lists{
+    overflow-y: auto;
+    height: 600px;
 }

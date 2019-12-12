@@ -25,7 +25,8 @@ export default class SongItem extends Component{
                 description:"欢迎同好们一起来交流"
             }
         ],
-        visible: false
+        visible: false,
+        click:false
     }
     showDrawer = () => {
         this.setState({
@@ -62,6 +63,9 @@ export default class SongItem extends Component{
 
             })
             .catch(e => console.log('错误:', e))
+        this.setState({
+            click:true
+        })
     }
     handleShare=()=>{
         const {songname,artist}=this.props
@@ -83,7 +87,7 @@ export default class SongItem extends Component{
     }
     render(){
         const {rankNumber,songname,artist,time,url,poster,history}=this.props
-        const {roomdata}=this.state
+        const {roomdata,click}=this.state
         return (
 
             <div>
@@ -111,10 +115,10 @@ export default class SongItem extends Component{
                             <Icon type="more"  style={{ fontSize: '30px',marginRight:15,float:"right"  }}/>
                         </a>
                         <a onClick={this.handleShare}>
-                        <Icon type="share-alt" style={{ fontSize: '30px',marginRight:15,float:"right"  }} />
+                            <Icon type="share-alt" style={{ fontSize: '30px',marginRight:15,float:"right"  }} />
                         </a>
                         <a onClick={this.addHeart}>
-                        <Icon type="heart" style={{ fontSize: '30px',marginRight:15,float:"right" }} />
+                            <Icon type="heart" theme={click?'filled':'outlined'}  style={{ fontSize: '30px',marginRight:15,float:"right",color:click?'rgb(207,80,34)':"" }} />
                         </a>
                         <a href={url} target="_blank">
                         <Icon type="link"  style={{ fontSize: '30px',marginRight:15,float:"right"  }}/>
