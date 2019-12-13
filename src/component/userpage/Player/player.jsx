@@ -1,27 +1,24 @@
 import React,{Component} from 'react'
-import {Icon,message} from 'antd'
+import {Icon,message,Popover,Slider} from 'antd'
 import './player.css'
+const title=(
+    <p className='popTitle'>
+        <Icon className='starIcon' type="star" />
+        播放列表
+    </p>
+)
 export default class Player extends Component{
-    state={
-        tracks:
-{           name: "元日",
-            artists: [
-                {
-                    name: "于文华",
-                }
-                ],
-            album: {
-                name: "国学唱歌集",
-                picUrl: "http://p3.music.126.net/SR9eFEjRB0NsscxN7-fHMw==/3344714372906000.jpg",
-            },
-            duration: 136829,
-            mp3Url: "http://m2.music.126.net/rUcfqqZbq7TIfJeAHfTrkw==/3376600210116829.mp3"
-},
-        currentTrackLen: 1, //歌单歌曲数
-        currentTrackIndex: 0, //当前播放的歌曲索引，默认加载第一首歌
-        currentTime: 0, //当前歌曲播放的时间
-        currentTotalTime: 0, //当前歌曲的总时间
-        playStatus: true, //true为播放状态，false为暂停状态
+    constructor(props)
+    {
+        super(props)
+        this.state={
+            playerList:props.playList,
+            currentTrackLen:1, //歌单歌曲数
+            currentTrackIndex: 0, //当前播放的歌曲索引，默认加载第一首歌
+            currentTime: 0, //当前歌曲播放的时间
+            currentTotalTime: 0, //当前歌曲的总时间
+            playStatus: true, //true为播放状态，false为暂停状态
+        }
     }
     updatePlayStatus=()=>{
         let audio = document.getElementById('audio');
@@ -30,10 +27,10 @@ export default class Player extends Component{
         }else{
             audio.pause();
         }
-
+        const {currentTrackIndex,playerList}=this.state
         //更新当前歌曲总时间
         this.setState({
-            currentTotalTime: this.state.tracks.duration / 1000}
+            currentTotalTime: playerList[currentTrackIndex].duration / 1000}
             );
     }
     play=()=>{
@@ -47,7 +44,10 @@ export default class Player extends Component{
         if(this.state.currentTrackIndex - 1 < 0){
             message.error('已经没有上一首了，快对播放列表进行填装~！');
         }else{
-            this.setState({currentTrackIndex:--this.state.currentTrackIndex},()=>{
+            this.setState({
+                currentTrackIndex:--this.state.currentTrackIndex,
+                currentTime:0
+            },()=>{
                 this.updatePlayStatus();
             });
         }
@@ -56,17 +56,27 @@ export default class Player extends Component{
         if(this.state.currentTrackIndex + 1 >=  this.state.currentTrackLen){
             message.error('已经没有下一首了，快对播放列表进行填装~！');
         }else{
-            this.setState({currentTrackIndex:++this.state.currentTrackIndex},()=>{
+            let audio = document.getElementById('audio');
+            audio.currentTime=0;
+            this.setState({
+                currentTrackIndex:++this.state.currentTrackIndex,
+                currentTime:0
+            },()=>{
                 this.updatePlayStatus();
             });
         }
     }
-    componentDidMount() {
+    componentDidMount()
+        {
         this.updatePlayStatus();
         setInterval(()=>{
+            const {playerList}=this.state
             let audio = document.getElementById('audio');
             if(this.state.playStatus)
-                this.setState({currentTime:audio.currentTime},()=>{
+                this.setState({
+                    currentTime:audio.currentTime,
+                    currentTrackLen:playerList.length
+                },()=>{
                 if(~~this.state.currentTime >= ~~this.state.currentTotalTime){
                     this.next();
                 }
@@ -74,16 +84,33 @@ export default class Player extends Component{
         }, 300);
     }
 
-    render(){
-        const  poster='http://cdnmusic.migu.cn/picture/2019/1202/2335/ASe1b6eb16a4d9405ab2239e11c5821eb4.jpg'
+    render()
+        {
+        const {currentTrackIndex,playerList,currentTrackLen}=this.state;
+        const content = (
+                <div>
+                    { playerList.map((item,index)=>
+                        {
+                            if(index!==0)
+                                return (
+                                    <p key={index} className={index===currentTrackIndex?'nowItem':'otherItem'}>
+                                        {index===currentTrackIndex?
+                                            <Icon type="loading" />:null}
+                                        {index}.{item.name}-{item.artists}
+                                    </p>
+                            )
+                        })
+                    }
+                </div>
+            );
         return (
-            <div className="player" style={{zIndex:100}}>
+            <div className="player">
 
                 <div className='musicPost'>
-                    <img src={poster} style={{width:100,height:100}}/>
+                    <img src={playerList[currentTrackIndex].poster} style={{width:100,height:100}}/>
                 </div>
                 <div className='trackInfo'>
-                    <div className="name">{this.state.tracks.name} / {this.state.tracks.artists[0].name}</div>
+                    <div className="name">{playerList[currentTrackIndex].name} / {playerList[currentTrackIndex].artists}</div>
                     <Time currentTime={this.state.currentTime} currentTotalTime={this.state.currentTotalTime} />
                 </div>
 
@@ -96,19 +123,28 @@ export default class Player extends Component{
                 <div className='icons'>
                     <Icon className='heartIcon' type="heart" theme="filled" />
                     <Icon className='orderIcon' type="ordered-list" />
+                    <Popover className='soundPop' placement="topRight" content={
+                        <Slider className='sliderSound' defaultValue={30} tooltipVisible />
+                    }>
                     <Icon className='soundIcon' type="sound" />
-                    <Icon className='menuIcon' type="menu-unfold" />
+                    </Popover>
+                    <Popover className='popoverItem' placement="topRight" content={content} title={title}>
+                        <Icon className='menuIcon' type="menu-unfold" />
+                    </Popover>
                 </div>
                 {/* 音频控件  */}
-                <audio id="audio" src={require('../../../music/asong.mp3')} >
+                {
+                    <audio id="audio" src={require('../../../music/asong'+currentTrackIndex+'.mp3')} >
                     Your browser does not support the audio element.
-                </audio>
+                    </audio>
+
+                }
             </div>
         )
-    }
-}
+    }}
 
-class Progress extends Component{
+class Progress extends Component
+{
     render() {
         return(
             <div className="progressParent">
@@ -122,9 +158,9 @@ class Controls extends Component{
     render() {
         let type;
         if(this.props.isPlay === true){
-            type = 'play-circle';
-        }else{
             type = 'pause-circle';
+        }else{
+            type = 'play-circle';
         }
         return (
             <div className="controls">
@@ -142,22 +178,24 @@ class Controls extends Component{
         )
     }
 }
-class Time extends Component{
-    timeConvert=(timestamp)=>{
+class Time extends Component {
+    timeConvert = (timestamp) => {
         var minutes = Math.floor(timestamp / 60);
         var seconds = Math.floor(timestamp - (minutes * 60));
 
-        if(seconds < 10) {
+        if (seconds < 10) {
             seconds = '0' + seconds;
         }
 
         timestamp = minutes + ':' + seconds;
         return timestamp;
     }
+
     render() {
-        return(
+        return (
             <div className="time">
-                <div className="current">{this.timeConvert(this.props.currentTime)}/{this.timeConvert(this.props.currentTotalTime)}</div>
+                <div
+                    className="current">{this.timeConvert(this.props.currentTime)}/{this.timeConvert(this.props.currentTotalTime)}</div>
             </div>
         )
     }

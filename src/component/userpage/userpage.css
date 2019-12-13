@@ -20,7 +20,10 @@
 }
 .editIcon
 {
-    font-size: 17px
+    font-size: 17px;
+    position: absolute;
+    top: 85px;
+    left:500px
 }
 .linkIcon{
     position: absolute;
@@ -113,8 +116,17 @@
 }
 .shareinlistIcon{
     font-size: 30px;
+    margin-right: 20px;
 }
 .playinlistIcon{
+    font-size: 30px;
+    width: 40px;
+    margin-right: 20px;
+    margin-top: 2px;
+}
+.closeinlistIcon{
+    font-size: 28px;
+    margin-right: 10px;
 }
 .musiclistDiv{
     float:left;
