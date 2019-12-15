@@ -1,0 +1,9 @@
+.AvatComment{
+    position: absolute;
+    top: 10px;
+    left:-10px;
+}
+.commenItem{
+    position: relative;
+    margin-left: 20px;
+}

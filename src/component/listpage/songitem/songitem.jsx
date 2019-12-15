@@ -102,26 +102,26 @@ export default class SongItem extends Component{
                         return (<a onClick={this.handleIn}><p key={index}>{item.title}</p></a>)
                 })}
                 </Drawer>
-                <div className='songCard'>
+                <div className={rankNumber%2===0?'songCard01':'songCard02'}>
                         <span className='rankNumber'>
                             {rankNumber+1}
                         </span>
-                        <img src={poster} style={{width:50,height:50}}/>
+                        <img src={poster} style={{width:70,height:70}}/>
                         <span className='songname'>
                             {songname}
                         </span>
 
                         <a onClick={this.handleClick}>
-                            <Icon type="more"  style={{ fontSize: '30px',marginRight:15,float:"right"  }}/>
+                            <Icon className='moreIcon' type="more"  style={{ fontSize: '30px',marginRight:15,float:"right"  }}/>
                         </a>
                         <a onClick={this.handleShare}>
-                            <Icon type="share-alt" style={{ fontSize: '30px',marginRight:15,float:"right"  }} />
+                            <Icon className='branchIcon' type="share-alt" style={{ fontSize: '30px',marginRight:15,float:"right"  }} />
                         </a>
                         <a onClick={this.addHeart}>
-                            <Icon type="heart" theme={click?'filled':'outlined'}  style={{ fontSize: '30px',marginRight:15,float:"right",color:click?'rgb(207,80,34)':"" }} />
+                            <Icon className='blingIcon' type="heart" theme={click?'filled':'outlined'}  style={{ fontSize: '30px',marginRight:15,float:"right",color:click?'rgb(207,80,34)':"" }} />
                         </a>
                         <a href={url} target="_blank">
-                        <Icon type="link"  style={{ fontSize: '30px',marginRight:15,float:"right"  }}/>
+                        <Icon className='urlIcon' type="link"  style={{ fontSize: '30px',marginRight:15,float:"right"  }}/>
                         </a>
                         <span className='time'>
                             {time}

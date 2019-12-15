@@ -1,6 +1,7 @@
 import { Comment, Icon, Tooltip, Avatar } from 'antd';
 import React,{Component} from 'react'
 import moment from 'moment';
+import './commentitem.css'
 
 export default class CommentItem extends React.Component {
     state = {
@@ -54,10 +55,12 @@ export default class CommentItem extends React.Component {
 
         return (
             <Comment
+                className='commenItem'
                 actions={actions}
                 author={<a>Han Solo</a>}
                 avatar={
                     <Avatar
+                        className='AvatComment'
                         src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
                         alt="Han Solo"
                     />

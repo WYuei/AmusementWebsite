@@ -1,3 +1,70 @@
 .infoContent{
-
+    background: white;
+    margin-top: 25px;
+    font-size: 17px;
+    margin-bottom: -10px;
+}
+.INFO{
+    position: relative;
+    padding: 15px;
+}
+.songPOST img{
+    width: 220px;
+}
+.songTITLE{
+    position: absolute;
+    top: 15px;
+    left: 260px;
+    font-size: 40px;
+    color: black;
+}
+.songARTIST{
+    position: absolute;
+    top: 85px;
+    left: 260px;
+    font-size: 18px;
+}
+.artistAva{
+    margin-right: 10px;
+}
+.songRHYME{
+    position: absolute;
+    top: 125px;
+    left: 260px;
+    font-size: 17px;
+}
+.wordBY{
+    position: absolute;
+    top: 155px;
+    left: 260px;
+    font-size: 17px;
+}
+.songALBUM{
+    position: absolute;
+    top: 185px;
+    left: 260px;
+    font-size: 17px;
+}
+.songTAGS{
+    position: absolute;
+    top: 217px;
+    left: 260px;
+}
+.showIdea{
+    position: relative;
+    padding: 25px;
+}
+.ICONICON{
+    position: absolute;
+    top: 90px;
+}
+.ICONICON2{
+    position: absolute;
+    top: 90px;
+    left: 350px;
+}
+.ICONICON3{
+    position: absolute;
+    top: 90px;
+    left: 300px;
 }

@@ -106,7 +106,7 @@ app.post('/userlikes', function(req, res) {
     })
 });
 
-app.post('/movielike', function(req, res) {
+app.post('/singword', function(req, res) {
     console.log(req.body.name);
     const sqlStr = "select * from usermovie where username='"+req.body.name.trim()+"'";
     connection.query(sqlStr,(err,results) => {

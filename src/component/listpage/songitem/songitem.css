@@ -1,8 +1,17 @@
-.songCard{
-    width: 800px;
+.songCard01{
+    width: 1000px;
     height: 100px;
-    border: black 1px solid;
-    padding: 20px;
+    border-bottom: gray 1px solid;
+    padding: 13px;
+    font-size: 20px;
+    background-color: whitesmoke;
+}
+.songCard02{
+    width: 1000px;
+    height: 100px;
+    border-bottom: gray 1px solid;
+    padding: 13px;
+    font-size: 20px;
 }
 span{
     margin: 20px;
@@ -16,4 +25,22 @@ span{
 a{
     text-decoration: none;
     color:inherit;
+}
+.moreIcon{
+    margin-top: 18px;
+}
+.branchIcon{
+    margin-top: 18px;
+}
+.blingIcon{
+    margin-top: 18px;
+}
+.urlIcon{
+    margin-top: 18px;
+}
+.classOne{
+    background-color: whitesmoke;
+}
+.rankNumber{
+    font-family: Georgia ;
 }
