@@ -99,7 +99,7 @@ export default class SongItem extends Component{
                     visible={this.state.visible}
                 >
                     {roomdata.map((item,index)=>{
-                        return (<a onClick={this.handleIn}><p key={index}>{item.title}</p></a>)
+                        return (<a onClick={this.handleIn} className='alist'><li className='classList' key={index}>{item.title}</li></a>)
                 })}
                 </Drawer>
                 <div className={rankNumber%2===0?'songCard01':'songCard02'}>

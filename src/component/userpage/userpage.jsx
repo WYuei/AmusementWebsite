@@ -43,7 +43,7 @@ export default class UserPage extends Component{
                 )
 
             })
-            .catch(e => console.log('错误:', e))
+            .catch(e => console.log('错误:', e));
         fetch('http://localhost:8080/movielike',
             {
                 method: "POST",

@@ -17,7 +17,7 @@
 {
     width: 200px;
     height: 200px;
-    background-image: url("../../img/intro-bg.jpg");
+    background-image: url("../../img/GOTPath_ZH-CN1955635212_1920x1080.jpg");
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-position: center;
@@ -27,12 +27,14 @@
     position:absolute;
 }
 .title01{
-    top: 10px;
-    left: 250px;
+    top: 20px;
+    left: 240px;
+    font-family: "Microsoft YaHei";
 }
 .title02{
-    left:250px;
-    top: 60px;
+    left:240px;
+    top: 80px;
+    font-family: "Microsoft YaHei";
 }
 
 .horseLight{
@@ -79,4 +81,22 @@ h4{
     left: 1300px;
     border-left: gray 1px solid;
     overflow-y:auto
+}
+.topIcon img{
+    width: 80px;
+    position: absolute;
+    top:30px;
+    left: 740px;
+}
+.topIcon{
+
+}
+.topnum{
+    position: absolute;
+    top: 20px;
+    left:820px;
+    font-size: 40px;
+    font-family: Georgia ;
+    font-weight: bolder;
+    color: rgb(207,91,57);
 }

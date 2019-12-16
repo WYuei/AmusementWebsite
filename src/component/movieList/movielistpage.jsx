@@ -224,7 +224,7 @@ export default class MovieListPage extends Component{
                             ()=>{
                                 message.success('成功分享链接~');
                             }
-                        }><p key={index}>{item.title}</p></a>)
+                        } className='alist'><li className='classList' key={index}>{item.title}</li></a>)
                     })}
             </Drawer>
             </div>
