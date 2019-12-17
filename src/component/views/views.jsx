@@ -108,6 +108,9 @@ export default class Views extends Component{
                     </Layout>
                 </Content>
             <div style={{ textAlign: 'center',height:70,color:"white"}}> ©2019 Created by WangYuWei 201706062422</div>
+            <div className='websiteLogo'>
+                <img src={require('../../img/websiteLogo.png')}/>
+            </div>
             </Layout>
             </BrowserRouter>)
     }

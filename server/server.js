@@ -187,14 +187,14 @@ app.post('/singword/', function(req, res) {
     console.log('reading singword...');
     //console.log(req.body.key);
     let str;
-    fs.readFile('./wordContent/content.txt',{encoding:"utf-8"}, function (err, fr) {
+
+    fs.readFile('./wordContent/'+req.body.key+'.txt',{encoding:"utf-8"}, function (err, fr) {
         //readFile回调函数
         if (err) {
             console.log(err);
         }else {
             str = fr;
-            console.log(req.body.key);
-            console.log('打开歌词文件成功！');
+            console.log('打开歌词文件'+req.body.key+'成功！');
             const sqlStr = 'select * from songTags where songID='+req.body.key
             connection.query(sqlStr,(err,results) => {
 
@@ -203,7 +203,7 @@ app.post('/singword/', function(req, res) {
                     new Result({msg:str,
                         data:results})
                 );
-                console.log('申请歌词对应作曲、标签等成功！');
+                console.log('申请'+req.body.key+'歌词对应作曲、标签等成功！');
 
             })
         }

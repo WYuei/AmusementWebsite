@@ -1,40 +1,52 @@
 .top{
-    width: 80%;
     height: 100px;
-    border: 1px solid black;
+    border-bottom: #dddddd 1px solid;
+    position: relative;
+    padding: 20px;
+}
+.top img{
+    width: 200px;
+
+}
+.topText{
+    position: absolute;
+    left: 250px;
+    font-size: 20px;
+    color: #a94442;
+    top: 10px;
 }
 .left
 {
     float: left;
     width: 1000px;
 
-    border:1px solid black;
 }
 .right{
     float: right;
-    width: 400px;
-    border:1px solid black;
-
+    width: 500px;
+    margin-top: 1px;
 }
 .LT1{
+    margin-top: 20px;
     width: 1000px;
-    height: 500px;
-    border:1px solid black;
+    height: 830px;
+    padding: 10px;
 }
 .LT2{
     width: 1000px;
-
-    border:1px solid black;
+    height: 830px;
+    padding: 10px;
 }
 .LT3{
     width: 1000px;
-
-    border:1px solid black;
+    height: 830px;
+    padding: 10px;
 }
 .movieItem{
     float: left;
     margin: 20px;
     position: relative;
+
 }
 .movieItem img{
     width: 200px;
@@ -44,17 +56,77 @@
     box-shadow:gray 1px 1px 3px 3px ;
 }
 .infoText{
-    width: 200px;
     position: absolute;
-    top: 20px;
-    background-color: black;
-    opacity: 0.5;
-    color: white;
-    font-size: 15px
+    top: -33px;
+    left: -20px;
+}
+.movietitle{
+    font-size: 22px;
+    color: gray;
+    font-family: "微软雅黑 Light";
+}
+.movieDetail{
+    position: absolute;
+    top: 300px;
+    left: -230px;
+    font-size: 20px;
+    color: rgb(201,91,87);
+    font-family: Georgia;
+}
+.movieItem{
+    margin-bottom: 80px;
 }
 .movieIcons{
     position: absolute;
     top: 280px;
     right: 20px;
     font-size: 25px;
+    margin-left: 20px;
 }
+.LT1title{
+    font-size: 25px;
+    margin-left: 20px;
+    font-weight: bolder;
+    margin-bottom: 40px;
+    border-bottom: #dddddd 1px solid;
+}
+.LT2title{
+    font-size: 25px;
+    margin-left: 20px;
+    font-weight: bolder;
+    margin-bottom: 40px;
+    border-bottom: #dddddd 1px solid;
+}
+.LT3title{
+    font-size: 25px;
+    margin-left: 20px;
+    font-weight: bolder;
+    margin-bottom: 40px;
+    border-bottom: #dddddd 1px solid;
+}
+.rightInfo{
+    margin-top: 30px;
+    font-size: 25px;
+    margin-left: 15px;
+    font-weight: bolder;
+    border-bottom: #dddddd 1px solid;
+    margin-bottom: 18px;
+}
+.movieWantedPoster{
+    float: left;
+    margin: 20px;
+    box-shadow:gray 0px 0px 2px 2px ;
+}
+.movieRightInfo{
+    float: left;
+    margin-top: 80px;
+    font-size: 20px;
+    color: #9d9d9d;
+    text-align: center;
+}
+.righttitle{
+    color:rgb(201,91,87);
+    font-size:25px;
+
+}
+

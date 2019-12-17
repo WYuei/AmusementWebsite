@@ -5,7 +5,7 @@ import './commentitem.css'
 
 export default class CommentItem extends React.Component {
     state = {
-        likes: 0,
+        likes: 1,
         dislikes: 0,
         action: null,
     };
@@ -28,7 +28,7 @@ export default class CommentItem extends React.Component {
 
     render() {
         const { likes, dislikes, action } = this.state;
-
+        const {comments}=this.props
         const actions = [
             <span key="comment-basic-like">
         <Tooltip title="Like">
@@ -57,19 +57,17 @@ export default class CommentItem extends React.Component {
             <Comment
                 className='commenItem'
                 actions={actions}
-                author={<a>Han Solo</a>}
+                author={<a>{comments.name}</a>}
                 avatar={
                     <Avatar
                         className='AvatComment'
-                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                        src={comments.src}
                         alt="Han Solo"
                     />
                 }
                 content={
                     <p>
-                        We supply a series of design principles, practical patterns and high quality design
-                        resources (Sketch and Axure), to help people create their product prototypes beautifully
-                        and efficiently.
+                        {comments.title}
                     </p>
                 }
                 datetime={

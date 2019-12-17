@@ -6,19 +6,120 @@ const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
 let arr=['1']
 const tagsColor=["#f50","#2db7f5","#87d068","#108ee9"]
 export default class SongInfo extends Component{
-    state={
-        word:'',
-        title:'',
-        artist:'',
-        posturl:'',
-        tags:'',
-        vocal:'',
-        rhyme:'',
-        wordCreatedby:'',
-        value: 3,
+    constructor(props)
+    {
+        super(props)
+        this.state={
+            chosenIndex:props.cIndex,
+            lastIndex:-1,
+            word:'',
+            title:'',
+            artist:'',
+            posturl:'',
+            tags:'',
+            vocal:'',
+            rhyme:'',
+            wordCreatedby:'',
+            value: 3,
+            comments:[
+                {
+                    name:'可可可乐',
+                    title:'有时候来不及沉淀，岁月总是跑在灵魂的前面',
+                    src:'http://211.137.107.15:11001/sme/uniaccess?code=MWQwMDEwMDBCaVdzVG51cjA2fDIwODgwMTA0MTgyNDE1%7CCF367C6E8872E823364CEFB180BA1E6395E4AB94D1D8A101798B024E0F290FFF'
+                },
+                {
+                    name:'Dream',
+                    title:'一如亡命之徒所说，我们都不在意未来的日子，我们都只活一次。也只有眼前亮起来了以后，才有机会相信它的价值。',
+                    src:'http://211.137.107.15:11001/sme/uniaccess?code=MWQwMDEwMDBCaFUzWmhYaTA2fDIwODgwMTA0MTgyNDE1%7C7882C5B0611A1189D0229BE83949CB94A9F0BF23A722922C6A9E44C48F789992'
+                }
+            ]
+        }
     }
 
+
+    componentWillReceiveProps(nextprops)
+    {
+        console.log('net',nextprops.cIndex)
+        if(nextprops.cIndex!==this.state.chosenIndex){
+
+            const c=nextprops.cIndex
+            console.log('now',c)
+            fetch('http://localhost:8080/singword/',
+                {
+                    method: "POST",
+                    mode: "cors",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: 'key='+c
+                }
+            )
+                .then(res => res.json())
+                .then(res =>
+                {
+                    let str=res.msg
+                    let data=res.data[0]
+                    this.dealTags(data.tags)
+                    this.setState({
+                        word:str,
+                        title:data.title,
+                        artist:data.artist,
+                        posturl:data.posterurl,
+                        tags:data.tags,
+                        vocal:data.vocal,
+                        rhyme:data.rhyme,
+                        wordCreatedby:data.word,
+                        chosenIndex:c
+                    })
+
+                })
+                .catch(e => console.log('错误:', e))
+        }
+    }
+
+    /*componentDidUpdate(prevProps){
+        console.log('pre',prevProps.cIndex)
+        if(prevProps.cIndex!==this.state.chosenIndex){
+
+           this.setState(
+               {chosenIndex:prevProps.cIndex}
+           );
+            const {chosenIndex}=this.state
+            console.log('now',chosenIndex)
+            fetch('http://localhost:8080/singword/',
+                {
+                    method: "POST",
+                    mode: "cors",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: 'key='+chosenIndex
+                }
+            )
+                .then(res => res.json())
+                .then(res =>
+                {
+                    let str=res.msg
+                    let data=res.data[0]
+                    this.dealTags(data.tags)
+                    this.setState({
+                        word:str,
+                        title:data.title,
+                        artist:data.artist,
+                        posturl:data.posterurl,
+                        tags:data.tags,
+                        vocal:data.vocal,
+                        rhyme:data.rhyme,
+                        wordCreatedby:data.word
+                    })
+
+                })
+                .catch(e => console.log('错误:', e))
+        }
+    }*/
+
    componentDidMount() {
+       const {chosenIndex}=this.state
        fetch('http://localhost:8080/singword/',
            {
                method: "POST",
@@ -26,7 +127,7 @@ export default class SongInfo extends Component{
                headers: {
                    "Content-Type": "application/x-www-form-urlencoded"
                },
-               body: 'key='+0
+               body: 'key='+chosenIndex
            }
        )
            .then(res => res.json())
@@ -34,15 +135,6 @@ export default class SongInfo extends Component{
            {
                let str=res.msg
                let data=res.data[0]
-               /* let result = "";
-              let c;
-               for (let i = 0; i < str.length; i++) {
-                   c = str.substr(i, 1);
-                   if ( c == "\n")
-                       result = result + " \r\n ";
-                   else if (c != "\r")
-                       result = result + c;
-               }*/
                this.dealTags(data.tags)
                this.setState({
                    word:str,
@@ -58,6 +150,8 @@ export default class SongInfo extends Component{
            })
            .catch(e => console.log('错误:', e))
    }
+
+
     dealTags=(tags)=>{
         const len=tags.length;
         arr=[];
@@ -79,7 +173,7 @@ export default class SongInfo extends Component{
         this.setState({ value });
     };
     render(){
-        const {word,title,artist,tags,vocal,rhyme,wordCreatedby,value,posturl}=this.state
+        const {word,title,artist,tags,vocal,rhyme,wordCreatedby,value,posturl,comments}=this.state
         return (
             <div>
                 <div className='INFO'>
@@ -125,8 +219,8 @@ export default class SongInfo extends Component{
                     <Icon className='ICONICON3' type="like" theme="filled" style={{ fontSize: '30px',marginRight:15,float:"right" }}/>
                 </div>
                 <div>
-                    <CommentItem/>
-                    <CommentItem/>
+                    <CommentItem comments={comments[0]}/>
+                    <CommentItem comments={comments[1]}/>
                 </div>
             </div>
 

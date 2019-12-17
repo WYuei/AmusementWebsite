@@ -1,5 +1,16 @@
 .layout{
     background-image: url(../../img/GOTPath_ZH-CN1955635212_1920x1080.jpg);
+    position: relative;
+}
+.websiteLogo{
+    position: absolute;
+    top:500px;
+    left: -20px;
+    opacity: 0.7;
+
+}
+.websiteLogo img{
+    width: 350px;
 }
 #intro {
     display: table;

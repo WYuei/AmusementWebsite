@@ -42,8 +42,7 @@ export default class ListPage extends Component{
     render(){
         const data= this.props.location.state;
         const {username}=data;
-        const {musicList}=this.state
-        console.log(musicList)
+        const {musicList, chosenIndex}=this.state
         return (
             <div>
                 <div className='musicRankTitle'>
@@ -101,7 +100,7 @@ export default class ListPage extends Component{
                    }
                 </div>
                 <div className='songContent'>
-                    <SongInfo />
+                    <SongInfo cIndex={chosenIndex} />
                 </div>
 
             </div>
