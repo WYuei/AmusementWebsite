@@ -58,13 +58,13 @@ export default class RoomPage extends Component{
         const {isBolder}=this.state
         const msgArr=this.state.messageArr
         if(msg)
-            msgArr[index]=[{
+            msgArr[index]=[{//音乐分享界面转过来的
                 isMe:true,
                 name:"Linvanuevi",
                 message:msg,
                 isBolder:isBolder
             }]
-        socket.on('chat message', (msg)=>
+        socket.on('chat message', (msg)=>//接收信息
             {console.log(msg)
                 if(msgArr[index]==null) //第一条信息
                 {msgArr[index]=[{
@@ -112,10 +112,14 @@ export default class RoomPage extends Component{
             msg=listfile.map((item,index)=>
                 <span className='fileClip' key={index}><Icon type="paper-clip" />{item.name}</span>
             )
+            socket.emit('chat message','你有一条文件信息！')
         }
         else
-            msg=this.state.inputMessage
-        socket.emit('chat message',msg)
+           {
+               msg=this.state.inputMessage
+               socket.emit('chat message',msg)
+           }
+
         if(msgArr[chosenIndex]==null) //第一条信息
             {msgArr[chosenIndex]=[{
                 isMe:true,

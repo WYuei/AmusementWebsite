@@ -50,7 +50,7 @@ export default class ListPage extends Component{
                         <img src={require('../../img/music0.png')} style={{width:200,height:200}}/>
                     </div>
                     <h2 className='title01'>音乐榜单</h2>
-                    <h2 className='title02'>更新至12-03</h2>
+                    <h2 className='title02'>更新至12-17</h2>
                     <div className='topIcon'>
                         <img src={require('../../img/topIcon.png')}/>
                         <span className='topnum'>50</span>

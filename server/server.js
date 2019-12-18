@@ -25,6 +25,28 @@ var connection = mysql.createConnection({
 });//配置数据库
 connection.connect();
 
+
+app.get('/download', function (req, res, next) {
+    /*var name = 'file.txt';
+    var path = './' + name;
+    var size = fs.statSync(path).size;
+    var f = fs.createReadStream(path);
+    console.log('1234')
+    res.writeHead(200, {
+        'Content-Type': 'application/force-download',
+        'Content-Disposition': 'attachment; filename=' + name,
+        'Content-Length': size
+    });
+    f.pipe(res);*/
+    var fReadStream = fs.createReadStream('./file.txt');
+    fReadStream.on("data",(chunk) => res.write(chunk,"binary"));
+    res.set({
+        "Content-type":"application/octet-stream",
+        "Content-Disposition":"attachment;filename="+encodeURI('file.txt')
+    });
+});
+
+
 app.get('/',(req,res) => {
     // 定义SQL语句
     const sqlStr = 'select * from user'

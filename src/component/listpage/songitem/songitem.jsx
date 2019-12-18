@@ -80,7 +80,7 @@ export default class SongItem extends Component{
                msg:'[音乐]'+songname+'-'+artist,
                roomitems:this.state.roomdata,
                username:'Linvanuevi',
-               index:2
+               index:0
            }
        }
        this.props.history.push(path)

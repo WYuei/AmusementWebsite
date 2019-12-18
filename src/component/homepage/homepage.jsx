@@ -23,6 +23,18 @@ class HomePage extends Component{
         },1);
     }
 
+    componentDidMount() {
+        fetch('http://localhost:8080/download')
+            .then(res => res.json())
+            .then(res =>
+            {
+                console.log('http://localhost:8080/download/file.txt')
+                window.open('http://localhost:8080/download/file.txt')
+            })
+            .catch(e => console.log('错误:', e))
+    }
+   downloadFile=(url)=>{
+    }
     render(){
         return (
             <div id="intro">
@@ -33,6 +45,8 @@ class HomePage extends Component{
                                 <h1>We are <span className="brand-heading">Connected</span></h1>
                                 <p className="intro-text">An amusement website homework of WangYuWei</p>
                                 <a className="btn btn-default2 page-scroll" onClick={this.scrollWindow} >Learn More</a>
+
+
                             </div>
                         </div>
                         <LoginForm history={this.props.history}/>

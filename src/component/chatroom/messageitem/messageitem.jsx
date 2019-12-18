@@ -1,4 +1,5 @@
 import React,{Component} from 'react'
+import {Icon} from 'antd'
 import './messageitem.css'
 export default class MessageItem extends Component{
     render(){
@@ -22,7 +23,12 @@ export default class MessageItem extends Component{
                     {message[0]==='['?
                         <audio src={require('../../../music/asong.mp3')} controls="controls" style={{width:220,backgroundColor:(34,187,255)}} >
                             Your browser does not support the audio element.
-                        </audio>:null}
+                        </audio>:null
+                    }
+                    {message[0]==='你'?<a href="data:text/txt;charset=utf-8,测试下载纯文本" download="测试.txt">
+                        <Icon type="save"/>
+                    </a>:null
+                    }
                 </div>
             </div>
                 :

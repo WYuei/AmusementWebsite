@@ -6,6 +6,7 @@
 }
 .usernameShow{
     position: absolute;
+    margin: 20px;
     left: 210px;
     top: 5px;
     font-weight: bold;
@@ -41,6 +42,9 @@
     right: 250px;
     width: 90px;
 }
+.likesNum span{
+    margin: 20px;
+}
 .likeNum{
     position: absolute;
     left: 20px;
@@ -66,6 +70,9 @@
     top: 30px;
     right: 80px;
     width: 90px;
+}
+.likesNum2 span{
+    margin: 20px;
 }
 .likeNum2{
     position: absolute;
